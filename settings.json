@@ -1,5 +1,6 @@
 {
-    "browser": true,
-    "firebase": true,
-    "scale": false
+    "browser": false,
+    "firebase": false,
+    "scale": false,
+    "mqtt": true
 }

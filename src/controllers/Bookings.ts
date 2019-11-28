@@ -1,18 +1,16 @@
 import Controller from '../utils/Controller';
 
-export default class Prouducts extends Controller {
+export default class Bookings extends Controller {
     public async addNewEntry(): Promise<any> {
         throw new Error('Method not impelemented');
     }
 
     public async findAllEntries(): Promise<any> {
-        const users = await this.app.models.User.aggregate([
+        return await this.app.models.Booking.aggregate([
             {
-                $match: {},
+                $match: { client: this.user.id },
             },
         ]);
-
-        return users;
     }
 
     public async findOneAndUpdate(): Promise<any> {
@@ -23,13 +21,7 @@ export default class Prouducts extends Controller {
         throw new Error('Method not implemented');
     }
 
-    /**
-     * Get user by token, currently logged in user
-     *
-     * @returns
-     * @memberof Platformusers
-     */
-    public async getOneItem() {
-        throw new Error('Method not implemeted');
+    public async cancelFlight() {
+        //
     }
 }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title><%= appname %></title>
+
+        <!-- header links -->
+
+        <%- include(viewsRoot + 'partials/header-links') %>
+    </head>
+    <body>
+        <%- include(viewsRoot + 'partials/header') %>
+
+        <!-- MAIN CONTENT -->
+
+        <div class="theme-hero-area">
+            <div class="theme-hero-area-bg-wrap">
+                <div class="theme-hero-area-bg" style="background-image:url(https://image.freepik.com/free-vector/3d-isometric-smartphone-booking-tickets_1441-2140.jpg);"></div>
+                <div class="theme-hero-area-mask theme-hero-area-mask-strong"></div>
+            </div>
+            <div class="theme-hero-area-body">
+                <div class="theme-page-section _pt-100 theme-page-section-xl">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-4">
+                                <div class="theme-login">
+                                    <div class="theme-login-header">
+                                        <h1 class="theme-login-title">Sign Up</h1>
+                                        <p class="theme-login-subtitle">Create new Bookify account</p>
+                                    </div>
+                                    <div class="theme-login-box">
+                                        <div class="theme-login-box-inner">
+                                            <form class="theme-login-form">
+                                                <div class="form-group theme-login-form-group">
+                                                    <input class="form-control" type="text" placeholder="Email Address" />
+                                                </div>
+                                                <div class="form-group theme-login-form-group">
+                                                    <input class="form-control" type="password" placeholder="Create Password" />
+                                                </div>
+                                                <a class="btn btn-uc btn-dark btn-block btn-lg" href="#">Create Account</a>
+                                            </form>
+                                        </div>
+                                        <div class="theme-login-box-alt">
+                                            <p>
+                                                Already have an account? &nbsp;
+                                                <a href="/login">Sign in.</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p class="theme-login-terms">
+                                        By signing up you accept our
+                                        <a href="#">terms of use</a>
+                                        <br />and <a href="#">privacy policy</a>.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- END OF MAIN CONTENT -->
+
+        <%- include(viewsRoot + 'partials/footer') %>
+        <!--  -->
+        <%- include(viewsRoot + 'partials/footer-scripts') %>
+    </body>
+</html>

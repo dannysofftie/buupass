@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title><%= appname %></title>
+
+        <!-- header links -->
+
+        <%- include(viewsRoot + 'partials/header-links') %>
+    </head>
+    <body>
+        <%- include(viewsRoot + 'partials/header') %>
+
+        <div class="theme-hero-area">
+            <div class="theme-hero-area-bg-wrap">
+                <div class="theme-hero-area-bg" style="background-image:url(https://image.freepik.com/free-vector/airport-isometric-illustration_1284-18728.jpg);"></div>
+                <div class="theme-hero-area-mask"></div>
+            </div>
+            <div class="theme-hero-area-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="theme-search-area _pt-150 _pb-100 _pv-mob-60 theme-search-area-stacked">
+                                <div class="theme-search-area-header _c-w _ta-c">
+                                    <h1 class="theme-search-area-title">Search for Flights</h1>
+                                    <p class="theme-search-area-subtitle">Compare several flight providers at once</p>
+                                </div>
+                                <div class="theme-search-area-form" id="hero-search-form">
+                                    <div class="row" data-gutter="none">
+                                        <div class="col-md-5 ">
+                                            <div class="row" data-gutter="none">
+                                                <div class="col-md-6 ">
+                                                    <div class="theme-search-area-section first theme-search-area-section-bg-white theme-search-area-section-no-border theme-search-area-section-mr theme-search-area-section-curved">
+                                                        <div class="theme-search-area-section-inner">
+                                                            <i class="theme-search-area-section-icon lin lin-location-pin"></i>
+                                                            <input class="theme-search-area-section-input typeahead" type="text" placeholder="Departure" data-provide="typeahead" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <div class="theme-search-area-section theme-search-area-section-bg-white theme-search-area-section-no-border theme-search-area-section-mr theme-search-area-section-curved">
+                                                        <div class="theme-search-area-section-inner">
+                                                            <i class="theme-search-area-section-icon lin lin-location-pin"></i>
+                                                            <input class="theme-search-area-section-input typeahead" type="text" placeholder="Arrival" data-provide="typeahead" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 ">
+                                            <div class="row" data-gutter="none">
+                                                <div class="col-md-4 ">
+                                                    <div class="theme-search-area-section theme-search-area-section-bg-white theme-search-area-section-no-border theme-search-area-section-mr theme-search-area-section-curved">
+                                                        <div class="theme-search-area-section-inner">
+                                                            <i class="theme-search-area-section-icon lin lin-calendar"></i>
+                                                            <input class="theme-search-area-section-input datePickerStart _mob-h" value="Wed 06/27" type="text" placeholder="Check-in" />
+                                                            <input class="theme-search-area-section-input _desk-h mobile-picker" value="2018-06-27" type="date" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 ">
+                                                    <div class="theme-search-area-section theme-search-area-section-bg-white theme-search-area-section-no-border theme-search-area-section-mr theme-search-area-section-curved">
+                                                        <div class="theme-search-area-section-inner">
+                                                            <i class="theme-search-area-section-icon lin lin-calendar"></i>
+                                                            <input class="theme-search-area-section-input datePickerEnd _mob-h" value="Mon 07/02" type="text" placeholder="Check-out" />
+                                                            <input class="theme-search-area-section-input _desk-h mobile-picker" value="2018-07-02" type="date" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 ">
+                                                    <div class="theme-search-area-section theme-search-area-section-bg-white theme-search-area-section-no-border theme-search-area-section-mr theme-search-area-section-curved quantity-selector" data-increment="Passengers">
+                                                        <div class="theme-search-area-section-inner">
+                                                            <i class="theme-search-area-section-icon lin lin-people"></i>
+                                                            <input class="theme-search-area-section-input" value="1 Passenger" type="text" />
+                                                            <div class="quantity-selector-box" id="FlySearchPassengers">
+                                                                <div class="quantity-selector-inner">
+                                                                    <p class="quantity-selector-title">Passengers</p>
+                                                                    <ul class="quantity-selector-controls">
+                                                                        <li class="quantity-selector-decrement">
+                                                                            <a href="#">&#45;</a>
+                                                                        </li>
+                                                                        <li class="quantity-selector-current">1</li>
+                                                                        <li class="quantity-selector-increment">
+                                                                            <a href="#">&#43;</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 ">
+                                            <a href="/search-results" class="theme-search-area-submit _mt-0 theme-search-area-submit-glow theme-search-area-submit-no-border theme-search-area-submit-curved">Search!</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="theme-search-area-options theme-search-area-options-white theme-search-area-options-center theme-search-area-options-dot-primary-inverse clearfix">
+                                    <div class="btn-group theme-search-area-options-list" data-toggle="buttons">
+                                        <label class="btn btn-primary active"> <input type="radio" name="flight-options" id="flight-option-1" checked />Round Trip </label>
+                                        <label class="btn btn-primary"> <input type="radio" name="flight-options" id="flight-option-2" />One Way </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="theme-page-section theme-page-section-xxl">
+            <div class="container">
+                <div class="theme-page-section-header">
+                    <h5 class="theme-page-section-title">Today's Top Deals</h5>
+                    <p class="theme-page-section-subtitle">Save your money with our best offers</p>
+                </div>
+                <div class="row row-col-mob-gap" data-gutter="10">
+                    <div class="col-md-3 ">
+                        <div class="banner _br-5 banner-animate banner-animate-mask-in banner-animate-zoom-in">
+                            <img class="banner-img" src="https://image.freepik.com/free-vector/vietnam-map-touristic-isometric-poster_1284-17336.jpg" alt="Image Alternative text" title="Image Title" />
+                            <div class="banner-mask"></div>
+                            <a class="banner-link" href="/search-results?utm_source=index-quickbar&criteria=Vietnam"></a>
+                            <div class="banner-caption _ta-c _pb-20 _pt-60 banner-caption-bottom banner-caption-grad">
+                                <h5 class="banner-title _fs">Flights to Vietnam</h5>
+                                <p class="banner-subtitle _fw-n _mt-5">Rountrips from $129</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 ">
+                        <div class="banner _br-5 banner-animate banner-animate-mask-in banner-animate-zoom-in">
+                            <img class="banner-img" src="https://image.freepik.com/free-vector/booking-online-concept-summer-holiday-vacation_108939-167.jpg" alt="Image Alternative text" title="Image Title" />
+                            <div class="banner-mask"></div>
+                            <a class="banner-link" href="/search-results?utm_source=index-quickbar&criteria=Free flights"></a>
+                            <div class="banner-caption _ta-c _pb-20 _pt-60 banner-caption-bottom banner-caption-grad">
+                                <h5 class="banner-title _fs">Fly for Free</h5>
+                                <p class="banner-subtitle _fw-n _mt-5">Earn free miles with rewards system</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 ">
+                        <div class="banner _br-5 banner-animate banner-animate-mask-in banner-animate-zoom-in">
+                            <img class="banner-img" src="https://image.freepik.com/free-vector/airport-terminal-design_24908-54828.jpg" alt="Image Alternative text" title="Image Title" />
+                            <div class="banner-mask"></div>
+                            <a class="banner-link" href="/search-results?utm_source=index-quickbar&criteria=First class flights"></a>
+                            <div class="banner-caption _ta-c _pb-20 _pt-60 banner-caption-bottom banner-caption-grad">
+                                <h5 class="banner-title _fs">First Class Flights</h5>
+                                <p class="banner-subtitle _fw-n _mt-5">Save up to 30%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 ">
+                        <div class="banner _br-5 banner-animate banner-animate-mask-in banner-animate-zoom-in">
+                            <img class="banner-img" src="https://image.freepik.com/free-vector/airport-isometric-compositions_1284-19184.jpg" alt="Image Alternative text" title="Image Title" />
+                            <div class="banner-mask"></div>
+                            <a class="banner-link" href="/search-results?utm_source=index-quickbar&criteria=Last minute deals"></a>
+                            <div class="banner-caption _ta-c _pb-20 _pt-60 banner-caption-bottom banner-caption-grad">
+                                <h5 class="banner-title _fs">Last Minute Deals</h5>
+                                <p class="banner-subtitle _fw-n _mt-5">Travel smart, travel cheap</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="theme-hero-area">
+            <div class="theme-hero-area-bg-wrap">
+                <div class="theme-hero-area-bg" style="background-image:url(https://image.freepik.com/free-vector/online-education-icon-learning-courses-laptop-with-electronic-book-concept_39422-668.jpg);"></div>
+                <div class="theme-hero-area-mask"></div>
+            </div>
+            <div class="theme-hero-area-body">
+                <div class="theme-page-section theme-page-section-xxl">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                                <div class="row row-col-mob-gap" data-gutter="60">
+                                    <div class="col-md-4 ">
+                                        <div class="feature feature-white feature-center">
+                                            <i class="feature-icon feature-icon-white feature-icon-box feature-icon-line feature-icon-round fa fa-globe"></i>
+                                            <div class="feature-caption _c-w">
+                                                <h5 class="feature-title">Explore the World</h5>
+                                                <p class="feature-subtitle">Start to discrover. We will help you to visit any place you can imagine</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 ">
+                                        <div class="feature feature-white feature-center">
+                                            <i class="feature-icon feature-icon-white feature-icon-box feature-icon-line feature-icon-round fa fa-gift"></i>
+                                            <div class="feature-caption _c-w">
+                                                <h5 class="feature-title">Gifts & Rewards</h5>
+                                                <p class="feature-subtitle">Get even more from our service. Spend less and travel more</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 ">
+                                        <div class="feature feature-white feature-center">
+                                            <i class="feature-icon feature-icon-white feature-icon-box feature-icon-line feature-icon-round fa fa-credit-card"></i>
+                                            <div class="feature-caption _c-w">
+                                                <h5 class="feature-title">Best prices</h5>
+                                                <p class="feature-subtitle">Contact us anytime, anywhere. We will resolve any issues ASAP</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="theme-page-section theme-page-section-xxl theme-page-section-gray">
+            <div class="container">
+                <div class="theme-page-section-header">
+                    <h5 class="theme-page-section-title">Travel Inspirations</h5>
+                    <p class="theme-page-section-subtitle">Our latest travel tips, hacks and insights</p>
+                </div>
+                <div class="row row-col-gap" data-gutter="10">
+                    <div class="col-md-3 ">
+                        <div class="theme-blog-item _br-3 theme-blog-item-full">
+                            <a class="theme-blog-item-link" href="https://blog.buupass.com"></a>
+                            <div class="banner _h-45vh  banner-">
+                                <div class="banner-bg" style="background-image:url(https://image.freepik.com/free-vector/illustration-buying-avia-tickets-online-open-notebook-boarding-pass-credit-card_123207-44.jpg);"></div>
+                                <div class="banner-caption banner-caption-bottom banner-caption-grad">
+                                    <p class="theme-blog-item-time">day ago</p>
+                                    <h5 class="theme-blog-item-title">Booking hotel in India</h5>
+                                    <p class="theme-blog-item-desc">Fringilla netus morbi himenaeos mus cum libero sapien magna ridiculus</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 ">
+                        <div class="theme-blog-item _br-3 theme-blog-item-full">
+                            <a class="theme-blog-item-link" href="https://blog.buupass.com"></a>
+                            <div class="banner _h-45vh  banner-">
+                                <div class="banner-bg" style="background-image:url(https://image.freepik.com/free-vector/airplane-passengers-composition_1284-23761.jpg);"></div>
+                                <div class="banner-caption banner-caption-bottom banner-caption-grad">
+                                    <p class="theme-blog-item-time">3 days ago</p>
+                                    <h5 class="theme-blog-item-title">Canada: forest trip</h5>
+                                    <p class="theme-blog-item-desc">Id congue facilisis quisque cras aliquam litora dui tempus maecenas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 ">
+                        <div class="theme-blog-item _br-3 theme-blog-item-full">
+                            <a class="theme-blog-item-link" href="https://blog.buupass.com"></a>
+                            <div class="banner _h-45vh  banner-">
+                                <div class="banner-bg" style="background-image:url(https://image.freepik.com/free-vector/poster-isometric-airport_1284-16916.jpg);"></div>
+                                <div class="banner-caption banner-caption-bottom banner-caption-grad">
+                                    <p class="theme-blog-item-time">week ago</p>
+                                    <h5 class="theme-blog-item-title">Total Solar Eclipse</h5>
+                                    <p class="theme-blog-item-desc">Nunc ligula netus ad aliquam lobortis pretium ipsum euismod est</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="theme-blog-item _br-3 theme-blog-item-full">
+                            <a class="theme-blog-item-link" href="https://blog.buupass.com"></a>
+                            <div class="banner _h-45vh  banner-">
+                                <div class="banner-bg" style="background-image:url(https://image.freepik.com/free-vector/airplane-isometric-icon_1284-4292.jpg);"></div>
+                                <div class="banner-caption banner-caption-bottom banner-caption-grad">
+                                    <p class="theme-blog-item-time">mounth ago</p>
+                                    <h5 class="theme-blog-item-title">Mix up your cabin classes</h5>
+                                    <p class="theme-blog-item-desc">Turpis nulla suscipit ligula vulputate ipsum non leo donec condimentum</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 ">
+                        <div class="theme-blog-item _br-3 theme-blog-item-full">
+                            <a class="theme-blog-item-link" href="https://blog.buupass.com"></a>
+                            <div class="banner _h-45vh  banner-">
+                                <div class="banner-bg" style="background-image:url(https://image.freepik.com/free-vector/abstract-airplane-with-hand-vector-illustration_118124-457.jpg);"></div>
+                                <div class="banner-caption banner-caption-bottom banner-caption-grad">
+                                    <p class="theme-blog-item-time">2 weeks ago</p>
+                                    <h5 class="theme-blog-item-title">Alaska days</h5>
+                                    <p class="theme-blog-item-desc">Egestas netus dui metus habitant habitasse nam sem natoque leo</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 ">
+                        <div class="theme-blog-item _br-3 theme-blog-item-full">
+                            <a class="theme-blog-item-link" href="https://blog.buupass.com"></a>
+                            <div class="banner _h-45vh  banner-">
+                                <div class="banner-bg" style="background-image:url(https://image.freepik.com/free-vector/airplanes-set-other-support-machines-airport-vector-isometric-illustrations-transport_80590-528.jpg);"></div>
+                                <div class="banner-caption banner-caption-bottom banner-caption-grad">
+                                    <p class="theme-blog-item-time">mounth ago</p>
+                                    <h5 class="theme-blog-item-title">Hawaii lifestyle</h5>
+                                    <p class="theme-blog-item-desc">Facilisi donec turpis tincidunt egestas varius hac vehicula habitasse ornare</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="theme-hero-area">
+            <div class="theme-hero-area-bg-wrap">
+                <div class="theme-hero-area-bg-pattern theme-hero-area-bg-pattern-ultra-light" style="background-image:url(img/patterns/travel/1.png);"></div>
+                <div class="theme-hero-area-grad-mask theme-hero-area-grad-mask-i"></div>
+                <div class="theme-hero-area-inner-shadow theme-hero-area-inner-shadow-light"></div>
+            </div>
+            <div class="theme-hero-area-body">
+                <div class="container">
+                    <div class="theme-page-section _p-0">
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                                <div class="theme-mobile-app">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="theme-mobile-app-section">
+                                                <img class="theme-mobile-app-img" src="https://buupass.com/app/themes/bus/assets/images/homepage/mobile_1.png" alt="Image Alternative text" title="Image Title" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="theme-mobile-app-section">
+                                                <div class="theme-mobile-app-body">
+                                                    <div class="theme-mobile-app-header">
+                                                        <h2 class="theme-mobile-app-title">Download our app</h2>
+                                                        <p class="theme-mobile-app-subtitle">Book and manage your trips on the go. Be notified of our hot deals and offers.</p>
+                                                    </div>
+                                                    <ul class="theme-mobile-app-btn-list">
+                                                        <li>
+                                                            <a class="btn btn-dark theme-mobile-app-btn" href="https://play.google.com/store/apps/details?id=io.andronicus.buupass&hl=en">
+                                                                <i class="theme-mobile-app-logo">
+                                                                    <img src="https://cdn2.iconfinder.com/data/icons/social-media-8/512/playstore.png" alt="Image Alternative text" title="Image Title" />
+                                                                </i>
+                                                                <span>
+                                                                    Download on
+                                                                    <br />
+                                                                    <span>Play Market</span>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <%- include(viewsRoot + 'partials/footer') %>
+        <!--  -->
+        <%- include(viewsRoot + 'partials/footer-scripts') %>
+    </body>
+</html>

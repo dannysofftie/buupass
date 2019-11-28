@@ -9,13 +9,13 @@ export default fp((app: FastifyInstance<Server, IncomingMessage, ServerResponse>
         routePrefix: '/docs',
         swagger: {
             info: {
-                title: 'Fastify API server',
+                title: 'BuuPass API server',
                 description:
                     'Responds to paths prefixed with either `api` or `auth`, other requests will be forwarded to Fastify error handler. For all endpoints expected to allow file uploads, the client making API call must specify `{Content-Type: multipart/form-data}` header, failure to which the request will be ignored. All responses are of type `application/json`. There are endpoints with missing response schema model definition. This is done on purpose as the response structure is not known beforehand.',
                 version: '0.0.1',
             },
             externalDocs: {
-                url: 'https://live-url.com',
+                url: 'https://buu-pass.herokuapp.com',
                 description: `Hosted on  Live high speed delivery server.`,
             },
             consumes: ['application/json'],
@@ -41,11 +41,11 @@ export default fp((app: FastifyInstance<Server, IncomingMessage, ServerResponse>
             servers: [
                 {
                     url: 'http://127.0.0.1:5000/',
-                    description: 'Local server, e.g. Main (development) server',
+                    description: 'Development, e.g. Main (development) server',
                 },
                 {
-                    url: 'http://api.example.com/v1',
-                    description: 'Optional server description, e.g. Main (production) server',
+                    url: 'http://buu-pass.herokuapp.com',
+                    description: 'Production, e.g. Main (production) server',
                 },
             ],
         },

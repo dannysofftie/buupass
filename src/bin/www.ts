@@ -4,7 +4,6 @@ import * as cookie from 'fastify-cookie';
 import * as cors from 'fastify-cors';
 import * as servefavicon from 'fastify-favicon';
 import * as multer from 'fastify-multer-op';
-import * as staticassets from 'fastify-static';
 import { IncomingMessage, Server, ServerResponse } from 'http';
 import { join, resolve } from 'path';
 import * as viewengine from 'point-of-view';
@@ -15,7 +14,7 @@ import database from '../models';
 import apiresources from '../routes/api-resources';
 import authentication from '../routes/authentication';
 import utilities from '../utils';
-import browser from '../libraries/Browser';
+import viewroutes from '../routes/view-routes';
 import * as cluster from 'cluster';
 import * as os from 'os';
 
@@ -75,9 +74,11 @@ export default class App {
         process.on('unhandledRejection', console.error);
 
         // graceful shutdown for processes, and fastify's browser instance
+        // uncomment this if using browser/puppeteer for report generation
         for (const signal of ['SIGINT', 'SIGTERM', 'SIGHUP'] as NodeJS.Signals[]) {
             process.on(signal, async () => {
-                this.app.browser && (await this.app.browser.close());
+                // this.app.browser && (await this.app.browser.close());
+                // add other plugins that require graceful shutdown here
                 process.exit();
             });
         }
@@ -99,8 +100,6 @@ export default class App {
         this.app.register(database);
 
         this.app.register(utilities);
-
-        settings.browser && this.app.register(browser);
 
         this.app.register(cookie);
 
@@ -124,11 +123,8 @@ export default class App {
 
         this.app.register(apiresources, { prefix: '/api' });
 
-        this.app.register(staticassets, {
-            root: join(__dirname, '..', '..', 'public'),
-            prefix: '/',
-            wildcard: false,
-        });
+        // @ts-ignore
+        this.app.use('/public', servestatic(join(__dirname, '..', '..', 'public')));
 
         // @ts-ignore
         this.app.use('/uploads', servestatic(join(__dirname, '..', '..', 'uploads')));
@@ -140,7 +136,12 @@ export default class App {
                 filename: resolve(__dirname, '..', '..', 'views'),
             },
             includeViewExtension: true,
+            defaultContext: {
+                viewsRoot: join(__dirname, '..', '..', 'views/'),
+            },
         });
+
+        this.app.register(viewroutes, { prefix: '/' });
     }
 
     private async workerProcesses() {

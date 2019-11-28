@@ -16,11 +16,11 @@ export interface ITemplate {
     compile: (template: ITemplatePaths, data?: any) => string;
 }
 
-const rootPath = join(__dirname, '..', '..', 'views', 'email-templates/');
+const rootPath = join(__dirname, '..', '..', 'views', 'emails/');
 
 const loadTemplate = {
-    'account-creation': 'accounts/new-account.ejs',
-    'reset-password': 'accounts/password-reset.ejs',
+    'account-creation': 'new-account.ejs',
+    'reset-password': 'password-reset.ejs',
 };
 
 export interface ICompileTemplate {

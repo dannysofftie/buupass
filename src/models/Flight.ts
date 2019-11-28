@@ -1,8 +1,7 @@
 import { Document, Schema, HookNextFunction, model } from 'mongoose';
 
-export type AccountType = 'usertype1' | 'usertype2' | 'usertype3' | 'usertype4' | 'usertype5';
-export interface IUser {
-    account: AccountType;
+export interface IFreight {
+    origin: string;
     email: string;
     name: string;
     idnumber: number;
@@ -10,14 +9,12 @@ export interface IUser {
     password: string;
 }
 
-export interface IUserDocument extends IUser, Document {}
+export interface IFlightDocument extends IFreight, Document {}
 
-const user = new Schema<IUserDocument>(
+const flight = new Schema<IFlightDocument>(
     {
-        account: {
+        origin: {
             type: String,
-            enum: ['usertype1', 'usertype2', 'usertype3', 'usertype4', 'usertype5'],
-            required: true,
         },
         email: {
             type: String,
@@ -35,7 +32,7 @@ const user = new Schema<IUserDocument>(
 );
 
 // tslint:disable-next-line: only-arrow-functions
-user.pre('aggregate', function(next: HookNextFunction) {
+flight.pre('aggregate', function(next: HookNextFunction) {
     this.pipeline().unshift(
         {
             $project: { id: '$_id', other: '$$ROOT' },
@@ -51,4 +48,4 @@ user.pre('aggregate', function(next: HookNextFunction) {
     next();
 });
 
-export const User = model<IUserDocument>('users', user);
+export const Flight = model<IFlightDocument>('flights', flight);

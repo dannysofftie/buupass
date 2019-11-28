@@ -27,13 +27,7 @@ export const configs: IConfig = {
 
         return process.env.API_LOCAL_URL;
     })(),
-    mongouri: (() => {
-        // if (production) {
-        return process.env.MONGO_PROD_URL;
-        // }
-
-        // return `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}:27017/${process.env.MONGO_DATABASE}`;
-    })(),
+    mongouri: process.env.MONGO_PROD_URL,
     jwtsecret: process.env.JWT_SECRET_KEY,
     mail: {
         host: process.env.APP_EMAIL_HOST,

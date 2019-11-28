@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title><%= appname %></title>
+
+        <!-- header links -->
+
+        <%- include(viewsRoot + 'partials/header-links') %>
+    </head>
+    <body>
+        <%- include(viewsRoot + 'partials/header') %>
+
+        <!-- MAIN CONTENT -->
+
+        <div class="theme-hero-area">
+            <div class="theme-hero-area-bg-wrap">
+                <div class="theme-hero-area-bg" style="background-image:url(https://image.freepik.com/free-vector/3d-isometric-smartphone-booking-tickets_1441-2140.jpg);"></div>
+                <div class="theme-hero-area-mask theme-hero-area-mask-strong"></div>
+            </div>
+            <div class="theme-hero-area-body">
+                <div class="theme-page-section _pt-100 theme-page-section-xl">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-4">
+                                <div class="theme-login theme-login-white">
+                                    <div class="theme-login-header">
+                                        <h1 class="theme-login-title">Sign In</h1>
+                                        <p class="theme-login-subtitle">To <%= appname %> account</p>
+                                    </div>
+                                    <div class="theme-login-box">
+                                        <div class="theme-login-box-inner">
+                                            <form class="theme-login-form">
+                                                <div class="form-group theme-login-form-group">
+                                                    <input class="form-control" type="text" placeholder="Email Address" />
+                                                </div>
+                                                <div class="form-group theme-login-form-group">
+                                                    <input class="form-control" type="password" placeholder="Password" />
+                                                    <p class="help-block">
+                                                        <a href="pwd-reset-2.html">Forgot password?</a>
+                                                    </p>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="theme-login-checkbox">
+                                                        <label class="icheck-label">
+                                                            <div class="icheck" style="position: relative;">
+                                                                <input class="icheck" type="checkbox" style="position: absolute; opacity: 0;" /><ins
+                                                                    class="iCheck-helper"
+                                                                    style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"
+                                                                ></ins>
+                                                            </div>
+                                                            <span class="icheck-title">Keep me logged in</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <a class="btn btn-uc btn-dark btn-block btn-lg" href="#">Sign In</a>
+                                            </form>
+                                            <div class="theme-login-social-separator">
+                                                <p>or sign in with social media</p>
+                                            </div>
+                                            <div class="theme-login-social-login">
+                                                <div class="row" data-gutter="10">
+                                                    <div class="col-xs-6">
+                                                        <a class="theme-login-social-login-google" href="javascript:void(0)">
+                                                            <i class="fa fa-google"></i>
+                                                            <span>
+                                                                Sign in with
+                                                                <br />
+                                                                <b>Google</b>
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <a class="theme-login-social-login-facebook" href="javascript:void(0)">
+                                                            <i class="fa fa-twitter-square"></i>
+                                                            <span>
+                                                                Sign in with
+                                                                <br />
+                                                                <b>Twitter</b>
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="theme-login-box-alt">
+                                            <p>
+                                                Don't have an account? &nbsp;
+                                                <a href="/sign-up">Sign up.</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p class="theme-login-terms">
+                                        By logging in you accept our
+                                        <a href="#">terms of use</a>
+                                        <br />and <a href="#">privacy policy</a>.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- END OF MAIN CONTENT -->
+
+        <%- include(viewsRoot + 'partials/footer') %>
+        <!--  -->
+        <%- include(viewsRoot + 'partials/footer-scripts') %>
+    </body>
+</html>

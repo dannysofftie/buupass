@@ -24,7 +24,7 @@ export function determineAccountAndUser(app: FastifyInstance, req: FastifyReques
  * @param {FastifyRequest} req
  * @param {FastifyReply<{}>} res
  */
-export function protectUserRoute(req: FastifyRequest, res: FastifyReply<{}>, done: (err?: Error) => void): any {
+export function protectClientResources(req: FastifyRequest, res: FastifyReply<{}>, done: (err?: Error) => void): any {
     const auth = req.headers['authorization'] as string;
 
     if (!auth) {
@@ -33,7 +33,7 @@ export function protectUserRoute(req: FastifyRequest, res: FastifyReply<{}>, don
 
     const { account, email, id } = determineAccountAndUser(this, req);
 
-    if (account !== 'account1') {
+    if (account !== 'client') {
         return res.status(403).send({ error: 'forbidden', message: 'Invalid credentials in authentication token' });
     }
 

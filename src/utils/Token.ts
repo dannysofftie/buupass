@@ -1,5 +1,6 @@
 import * as jwt from 'jsonwebtoken';
 import { configs } from '../configs';
+import { AccountType } from '../models/Account';
 
 /**
  * Payload expected by JWT's sign token function.
@@ -9,7 +10,7 @@ import { configs } from '../configs';
 interface IJWTPayload {
     email: string;
     id: string;
-    account: 'account1' | 'account2';
+    account: AccountType;
 }
 
 export interface IJWTToken {
