@@ -290,7 +290,7 @@
                     data['arrival'] = $('#checkout').val() + '/19';
                     data['seats'] = parseInt($('#passengers').val());
 
-                    if (!data['origin'] || !data['destination'] || !data['departure'] || !data['arrival'] || !data['seats']) {
+                    if (!data['origin'] || !data['destination']) {
                         return toastr.error('Enter required info for correct matches');
                     }
 
