@@ -15,8 +15,8 @@ export default fp((app: FastifyInstance<Server, IncomingMessage, ServerResponse>
                 version: '0.0.1',
             },
             externalDocs: {
-                url: 'https://buu-pass.herokuapp.com',
-                description: `Hosted on  Live high speed delivery server.`,
+                url: 'http://134.209.24.6:5000',
+                description: `Hosted on Live high speed delivery server.`,
             },
             consumes: ['application/json'],
             produces: ['application/json'],
@@ -40,11 +40,11 @@ export default fp((app: FastifyInstance<Server, IncomingMessage, ServerResponse>
             },
             servers: [
                 {
-                    url: 'http://127.0.0.1:5000/',
+                    url: 'http://127.0.0.1:5000',
                     description: 'Development, e.g. Main (development) server',
                 },
                 {
-                    url: 'http://buu-pass.herokuapp.com',
+                    url: 'http://134.209.24.6:5000',
                     description: 'Production, e.g. Main (production) server',
                 },
             ],

@@ -13,10 +13,10 @@ export default (app: FastifyInstance<Server, IncomingMessage, ServerResponse>, o
                 body: {
                     type: 'object',
                     properties: {
-                        username: { type: 'string', description: 'Will accept either username or email address' },
+                        email: { type: 'string', description: 'Will accept email address' },
                         password: { type: 'string', description: 'User password' },
                     },
-                    required: ['username', 'password'],
+                    required: ['email', 'password'],
                 },
                 response: {
                     200: {
@@ -75,7 +75,7 @@ export default (app: FastifyInstance<Server, IncomingMessage, ServerResponse>, o
                         email: { type: 'string', description: `User's email address` },
                         account: { type: 'string', enum: ['client', 'admin'], description: 'Account authentication role, accepted values are either of below' },
                     },
-                    required: ['name', 'email', 'account'],
+                    required: ['password', 'email', 'account'],
                 },
                 summary: 'Create user account',
             },

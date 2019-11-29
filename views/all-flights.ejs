@@ -30,8 +30,8 @@
                         <div class="col-md-10 col-md-offset-1">
                             <div class="theme-search-area _mob-h theme-search-area-white theme-search-area-stacked">
                                 <div class="theme-search-area-header _ta-c">
-                                    <h1 class="theme-search-area-title theme-search-area-title-sm">175 Flights to Lodon</h1>
-                                    <p class="theme-search-area-subtitle">Dignissim massa a tellus habitasse lacus rhoncus nunc</p>
+                                    <h1 class="theme-search-area-title theme-search-area-title-sm"><%= flights.length %> flights to different destinations</h1>
+                                    <p class="theme-search-area-subtitle">Search & book flights</p>
                                 </div>
                                 <div class="theme-search-area-form" id="hero-search-form">
                                     <div class="row" data-gutter="none">
@@ -41,7 +41,7 @@
                                                     <div class="theme-search-area-section first theme-search-area-section-curved theme-search-area-section-sm">
                                                         <div class="theme-search-area-section-inner">
                                                             <i class="theme-search-area-section-icon lin lin-location-pin"></i>
-                                                            <input class="theme-search-area-section-input typeahead" value="New York, United States" type="text" placeholder="Departure" data-provide="typeahead" />
+                                                            <input class="theme-search-area-section-input typeahead" type="text" placeholder="From" id="origin" data-provide="typeahead" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -49,7 +49,7 @@
                                                     <div class="theme-search-area-section theme-search-area-section-curved theme-search-area-section-sm">
                                                         <div class="theme-search-area-section-inner">
                                                             <i class="theme-search-area-section-icon lin lin-location-pin"></i>
-                                                            <input class="theme-search-area-section-input typeahead" value="London, United Kindom" type="text" placeholder="Arrival" data-provide="typeahead" />
+                                                            <input class="theme-search-area-section-input typeahead" type="text" placeholder="To" id="destination" data-provide="typeahead" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -61,8 +61,8 @@
                                                     <div class="theme-search-area-section theme-search-area-section-curved theme-search-area-section-sm">
                                                         <div class="theme-search-area-section-inner">
                                                             <i class="theme-search-area-section-icon lin lin-calendar"></i>
-                                                            <input class="theme-search-area-section-input datePickerStart _mob-h" value="Wed 06/27" type="text" placeholder="Check-in" />
-                                                            <input class="theme-search-area-section-input _desk-h mobile-picker" value="2018-06-27" type="text" />
+                                                            <input class="theme-search-area-section-input datePickerStart _mob-h" type="text" id="checkin" placeholder="Check-in" />
+                                                            <input class="theme-search-area-section-input _desk-h mobile-picker" type="text" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -70,8 +70,8 @@
                                                     <div class="theme-search-area-section theme-search-area-section-curved theme-search-area-section-sm">
                                                         <div class="theme-search-area-section-inner">
                                                             <i class="theme-search-area-section-icon lin lin-calendar"></i>
-                                                            <input class="theme-search-area-section-input datePickerEnd _mob-h" value="Mon 07/02" type="text" placeholder="Check-out" />
-                                                            <input class="theme-search-area-section-input _desk-h mobile-picker" value="2018-07-02" type="text" />
+                                                            <input class="theme-search-area-section-input datePickerEnd _mob-h" type="text" id="checkout" placeholder="Check-out" />
+                                                            <input class="theme-search-area-section-input _desk-h mobile-picker" type="text" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -79,7 +79,7 @@
                                                     <div class="theme-search-area-section theme-search-area-section-curved theme-search-area-section-sm quantity-selector" data-increment="Passengers">
                                                         <div class="theme-search-area-section-inner">
                                                             <i class="theme-search-area-section-icon lin lin-people"></i>
-                                                            <input class="theme-search-area-section-input" value="1 Passenger" type="text" />
+                                                            <input class="theme-search-area-section-input" id="passengers" value="0" type="text" />
                                                             <div class="quantity-selector-box" id="FlySearchPassengers">
                                                                 <div class="quantity-selector-inner">
                                                                     <p class="quantity-selector-title">Passengers</p>
@@ -100,7 +100,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-1 ">
-                                            <button class="theme-search-area-submit _tt-uc _mt-0 theme-search-area-submit-curved theme-search-area-submit-sm">Edit</button>
+                                            <button class="theme-search-area-submit _tt-uc _mt-0 theme-search-area-submit-curved theme-search-area-submit-sm search-flight">Search</button>
                                         </div>
                                     </div>
                                 </div>
@@ -108,79 +108,6 @@
                                     <div class="btn-group theme-search-area-options-list" data-toggle="buttons">
                                         <label class="btn btn-primary active"> <input type="radio" name="flight-options" id="flight-option-1" checked="" />Round Trip </label>
                                         <label class="btn btn-primary"> <input type="radio" name="flight-options" id="flight-option-2" />One Way </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="theme-search-area-inline _desk-h theme-search-area-inline-white">
-                                <h4 class="theme-search-area-inline-title">Lodon Flights</h4>
-                                <p class="theme-search-area-inline-details">June 27 → July 02, 1 Passnger</p>
-                                <a class="theme-search-area-inline-link magnific-inline" href="#searchEditModal"> <i class="fa fa-pencil"></i>Edit </a>
-                                <div class="magnific-popup magnific-popup-sm mfp-hide" id="searchEditModal">
-                                    <div class="theme-search-area theme-search-area-vert">
-                                        <div class="theme-search-area-header">
-                                            <h1 class="theme-search-area-title theme-search-area-title-sm">Edit your Search</h1>
-                                            <p class="theme-search-area-subtitle">Prices might be different from current results</p>
-                                        </div>
-                                        <div class="theme-search-area-form">
-                                            <div class="theme-search-area-section first theme-search-area-section-curved">
-                                                <label class="theme-search-area-section-label">From</label>
-                                                <div class="theme-search-area-section-inner">
-                                                    <i class="theme-search-area-section-icon lin lin-location-pin"></i>
-                                                    <input class="theme-search-area-section-input typeahead" value="New York" type="text" placeholder="Departure" data-provide="typeahead" />
-                                                </div>
-                                            </div>
-                                            <div class="theme-search-area-section theme-search-area-section-curved">
-                                                <label class="theme-search-area-section-label">To</label>
-                                                <div class="theme-search-area-section-inner">
-                                                    <i class="theme-search-area-section-icon lin lin-location-pin"></i>
-                                                    <input class="theme-search-area-section-input typeahead" type="text" placeholder="Arrival" data-provide="typeahead" />
-                                                </div>
-                                            </div>
-                                            <div class="row" data-gutter="10">
-                                                <div class="col-md-6 ">
-                                                    <div class="theme-search-area-section theme-search-area-section-curved">
-                                                        <label class="theme-search-area-section-label">Depart</label>
-                                                        <div class="theme-search-area-section-inner">
-                                                            <i class="theme-search-area-section-icon lin lin-calendar"></i>
-                                                            <input class="theme-search-area-section-input datePickerStart _mob-h" value="Wed 06/27" type="text" placeholder="Check-in" />
-                                                            <input class="theme-search-area-section-input _desk-h mobile-picker" value="2018-06-27" type="text" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 ">
-                                                    <div class="theme-search-area-section theme-search-area-section-curved">
-                                                        <label class="theme-search-area-section-label">Arrival</label>
-                                                        <div class="theme-search-area-section-inner">
-                                                            <i class="theme-search-area-section-icon lin lin-calendar"></i>
-                                                            <input class="theme-search-area-section-input datePickerEnd _mob-h" value="Mon 07/02" type="text" placeholder="Check-out" />
-                                                            <input class="theme-search-area-section-input _desk-h mobile-picker" value="2018-07-02" type="text" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="theme-search-area-section theme-search-area-section-curved quantity-selector" data-increment="Passengers">
-                                                <label class="theme-search-area-section-label">Passengers</label>
-                                                <div class="theme-search-area-section-inner">
-                                                    <i class="theme-search-area-section-icon lin lin-people"></i>
-                                                    <input class="theme-search-area-section-input" value="1 Passenger" type="text" />
-                                                    <div class="quantity-selector-box" id="mobile-FlySearchPassengers">
-                                                        <div class="quantity-selector-inner">
-                                                            <p class="quantity-selector-title">Passengers</p>
-                                                            <ul class="quantity-selector-controls">
-                                                                <li class="quantity-selector-decrement">
-                                                                    <a href="#">-</a>
-                                                                </li>
-                                                                <li class="quantity-selector-current">1</li>
-                                                                <li class="quantity-selector-increment">
-                                                                    <a href="#">+</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button class="theme-search-area-submit _mt-0 _tt-uc theme-search-area-submit-curved">Change</button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -200,80 +127,20 @@
                                     <div class="theme-search-results-sidebar-section">
                                         <h5 class="theme-search-results-sidebar-section-title">Airlines</h5>
                                         <div class="theme-search-results-sidebar-section-checkbox-list">
+                                            <% for(const flight of flights.map(a => a.airline).filter((value, index, self) => self.indexOf(value) === index)) { %>
                                             <div class="theme-search-results-sidebar-section-checkbox-list-items">
                                                 <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
                                                     <label class="icheck-label">
                                                         <div class="icheck" style="position: relative;">
-                                                            <input class="icheck" type="checkbox" style="position: absolute; opacity: 0;" /><ins
-                                                                class="iCheck-helper"
-                                                                style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"
-                                                            ></ins>
+                                                            <input class="icheck" type="checkbox" style="position: absolute; opacity: 0;" />
+                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"> </ins>
                                                         </div>
-                                                        <span class="icheck-title">KLM Royal Dutch...</span>
+                                                        <span class="icheck-title"><%= flight %></span>
                                                     </label>
-                                                    <span class="theme-search-results-sidebar-section-checkbox-list-amount">$423</span>
-                                                </div>
-                                                <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                    <label class="icheck-label">
-                                                        <div class="icheck" style="position: relative;">
-                                                            <input class="icheck" type="checkbox" style="position: absolute; opacity: 0;" /><ins
-                                                                class="iCheck-helper"
-                                                                style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"
-                                                            ></ins>
-                                                        </div>
-                                                        <span class="icheck-title">LOT Polish Airlines</span>
-                                                    </label>
-                                                    <span class="theme-search-results-sidebar-section-checkbox-list-amount">$144</span>
-                                                </div>
-                                                <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                    <label class="icheck-label">
-                                                        <div class="icheck" style="position: relative;">
-                                                            <input class="icheck" type="checkbox" style="position: absolute; opacity: 0;" /><ins
-                                                                class="iCheck-helper"
-                                                                style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"
-                                                            ></ins>
-                                                        </div>
-                                                        <span class="icheck-title">Wow Airlines</span>
-                                                    </label>
-                                                    <span class="theme-search-results-sidebar-section-checkbox-list-amount">$415</span>
-                                                </div>
-                                                <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                    <label class="icheck-label">
-                                                        <div class="icheck" style="position: relative;">
-                                                            <input class="icheck" type="checkbox" style="position: absolute; opacity: 0;" /><ins
-                                                                class="iCheck-helper"
-                                                                style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"
-                                                            ></ins>
-                                                        </div>
-                                                        <span class="icheck-title">Virgin Atlantic...</span>
-                                                    </label>
-                                                    <span class="theme-search-results-sidebar-section-checkbox-list-amount">$493</span>
-                                                </div>
-                                                <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                    <label class="icheck-label">
-                                                        <div class="icheck" style="position: relative;">
-                                                            <input class="icheck" type="checkbox" style="position: absolute; opacity: 0;" /><ins
-                                                                class="iCheck-helper"
-                                                                style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"
-                                                            ></ins>
-                                                        </div>
-                                                        <span class="icheck-title">Delta Airlines</span>
-                                                    </label>
-                                                    <span class="theme-search-results-sidebar-section-checkbox-list-amount">$235</span>
-                                                </div>
-                                                <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                    <label class="icheck-label">
-                                                        <div class="icheck" style="position: relative;">
-                                                            <input class="icheck" type="checkbox" style="position: absolute; opacity: 0;" /><ins
-                                                                class="iCheck-helper"
-                                                                style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"
-                                                            ></ins>
-                                                        </div>
-                                                        <span class="icheck-title">SWISS Airlines</span>
-                                                    </label>
-                                                    <span class="theme-search-results-sidebar-section-checkbox-list-amount">$417</span>
+                                                    <span class="theme-search-results-sidebar-section-checkbox-list-amount"><%= new Intl.NumberFormat('en', { style: 'currency', currency: 'KSH' }).format(flights.find(a => a.airline === flight)['cost']) %></span>
                                                 </div>
                                             </div>
+                                            <% } %>
                                         </div>
                                     </div>
                                 </div>
@@ -285,43 +152,49 @@
                             <h5 class="theme-search-results-sort-title">Sort by:</h5>
                             <ul class="theme-search-results-sort-list">
                                 <li>
-                                    <a href="#"
-                                        >Price
+                                    <a href="#">
+                                        Price
                                         <span>Low → High</span>
                                     </a>
                                 </li>
                                 <li class="active">
-                                    <a href="#"
-                                        >Duration
+                                    <a href="#">
+                                        Duration
                                         <span>Long → Short</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#"
-                                        >Recommended
+                                    <a href="#">
+                                        Recommended
                                         <span>High → Low</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#"
-                                        >Airline Name
+                                    <a href="#">
+                                        Airline Name
                                         <span>Name &nbsp; A → Z</span>
                                     </a>
                                 </li>
                             </ul>
                         </div>
+                        <% if(!(typeof user !== 'undefined' && user['email'])) { %>
                         <div class="theme-search-results-sign-in _mob-h bg-grad">
                             <i class="theme-search-results-sign-in-icon fa fa-unlock-alt"></i>
+
                             <h5 class="theme-search-results-sign-in-title">
                                 Sign in to unlock our secret delas. Save up to
                                 <b>50%</b>
                             </h5>
-                            <a class="btn theme-search-results-sign-in-btn btn-ghost btn-white" href="#">Sign in now</a>
+                            <a class="btn theme-search-results-sign-in-btn btn-ghost btn-white" href="/login">Sign in now</a>
                         </div>
+
+                        <% } %>
                         <div class="theme-search-results">
+                            <% for(const flight of flights) { %>
                             <div class="theme-search-results-item _mb-10 _b-n theme-search-results-item-rounded theme-search-results-item-">
                                 <div class="theme-search-results-item-preview">
                                     <a class="theme-search-results-item-mask-link" href="#searchResultsItem-1" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="searchResultsItem-1"></a>
+
                                     <div class="row" data-gutter="20">
                                         <div class="col-md-10 ">
                                             <div class="theme-search-results-item-flight-sections">
@@ -338,17 +211,16 @@
                                                                     <div class="col-md-3 ">
                                                                         <div class="theme-search-results-item-flight-section-meta">
                                                                             <p class="theme-search-results-item-flight-section-meta-time">
-                                                                                03:30
-                                                                                <span>pm</span>
+                                                                                <%= moment(flight['departure']).format('hh:mm A') %>
                                                                             </p>
-                                                                            <p class="theme-search-results-item-flight-section-meta-city">London</p>
-                                                                            <p class="theme-search-results-item-flight-section-meta-date">May 17, 2018</p>
+                                                                            <p class="theme-search-results-item-flight-section-meta-city"><%= flight['origin'] %></p>
+                                                                            <p class="theme-search-results-item-flight-section-meta-date"><%= moment(flight['departure']).format('Do MMM YYYY') %></p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6 ">
                                                                         <div class="theme-search-results-item-flight-section-path">
                                                                             <div class="theme-search-results-item-flight-section-path-fly-time">
-                                                                                <p>20h 0m</p>
+                                                                                <p><%= moment(flight['arrival']).diff(moment(flight['departure']), 'hours') + ' hours' %></p>
                                                                             </div>
                                                                             <div class="theme-search-results-item-flight-section-path-line"></div>
                                                                             <div class="theme-search-results-item-flight-section-path-line-start">
@@ -366,96 +238,33 @@
                                                                     <div class="col-md-3 ">
                                                                         <div class="theme-search-results-item-flight-section-meta">
                                                                             <p class="theme-search-results-item-flight-section-meta-time">
-                                                                                11:30
-                                                                                <span>am</span>
+                                                                                <%= moment(flight['arrival']).format('hh:mm A') %>
                                                                             </p>
-                                                                            <p class="theme-search-results-item-flight-section-meta-city">New York</p>
-                                                                            <p class="theme-search-results-item-flight-section-meta-date">May 18, 2018</p>
+                                                                            <p class="theme-search-results-item-flight-section-meta-city"><%= flight['destination'] %></p>
+                                                                            <p class="theme-search-results-item-flight-section-meta-date"><%= moment(flight['arrival']).format('Do MMM YYYY') %></p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <h5 class="theme-search-results-item-flight-section-airline-title">Operated by Delta Airlines</h5>
+                                                    <h5 class="theme-search-results-item-flight-section-airline-title">Operated by <%= flight['airline'] %></h5>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-2 ">
                                             <div class="theme-search-results-item-book">
                                                 <div class="theme-search-results-item-price">
-                                                    <p class="theme-search-results-item-price-tag">$270</p>
+                                                    <p class="theme-search-results-item-price-tag"><%= new Intl.NumberFormat('en', { style: 'currency', currency: 'KSH' }).format(flight['cost']) %></p>
                                                     <p class="theme-search-results-item-price-sign">economy</p>
                                                 </div>
-                                                <a class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn" href="/flight-checkout?utm_source=booking-section&id=879329954jrtngvh543">Book Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="collapse theme-search-results-item-collapse" id="searchResultsItem-1">
-                                    <div class="theme-search-results-item-extend">
-                                        <a class="theme-search-results-item-extend-close" href="#searchResultsItem-1" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="searchResultsItem-1">✕</a>
-                                        <div class="theme-search-results-item-extend-inner">
-                                            <div class="theme-search-results-item-flight-detail-items">
-                                                <div class="theme-search-results-item-flight-details">
-                                                    <div class="row">
-                                                        <div class="col-md-3 ">
-                                                            <div class="theme-search-results-item-flight-details-info">
-                                                                <h5 class="theme-search-results-item-flight-details-info-title">Depart</h5>
-                                                                <p class="theme-search-results-item-flight-details-info-date">Tue, May 17</p>
-                                                                <p class="theme-search-results-item-flight-details-info-cities">London → New York</p>
-                                                                <p class="theme-search-results-item-flight-details-info-fly-time">20h 0m</p>
-                                                                <p class="theme-search-results-item-flight-details-info-stops">non-stop</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-9 ">
-                                                            <div class="theme-search-results-item-flight-details-schedule">
-                                                                <ul class="theme-search-results-item-flight-details-schedule-list">
-                                                                    <li>
-                                                                        <i class="fa fa-plane theme-search-results-item-flight-details-schedule-icon"></i>
-                                                                        <div class="theme-search-results-item-flight-details-schedule-dots"></div>
-                                                                        <p class="theme-search-results-item-flight-details-schedule-date">Tue, May 17</p>
-                                                                        <div class="theme-search-results-item-flight-details-schedule-time">
-                                                                            <span class="theme-search-results-item-flight-details-schedule-time-item"
-                                                                                >03:30
-                                                                                <span>pm</span>
-                                                                            </span>
-                                                                            <span class="theme-search-results-item-flight-details-schedule-time-separator">—</span>
-                                                                            <span class="theme-search-results-item-flight-details-schedule-time-item"
-                                                                                >11:30
-                                                                                <span>am</span>
-                                                                            </span>
-                                                                        </div>
-                                                                        <p class="theme-search-results-item-flight-details-schedule-fly-time">20h 0m</p>
-                                                                        <div class="theme-search-results-item-flight-details-schedule-destination">
-                                                                            <div class="theme-search-results-item-flight-details-schedule-destination-item">
-                                                                                <p class="theme-search-results-item-flight-details-schedule-destination-title"><b>CLY</b>City</p>
-                                                                                <p class="theme-search-results-item-flight-details-schedule-destination-city">London</p>
-                                                                            </div>
-                                                                            <div class="theme-search-results-item-flight-details-schedule-destination-separator">
-                                                                                <span>→</span>
-                                                                            </div>
-                                                                            <div class="theme-search-results-item-flight-details-schedule-destination-item">
-                                                                                <p class="theme-search-results-item-flight-details-schedule-destination-title"><b>LGA</b>LaGuardia</p>
-                                                                                <p class="theme-search-results-item-flight-details-schedule-destination-city">New York</p>
-                                                                            </div>
-                                                                        </div>
-                                                                        <ul class="theme-search-results-item-flight-details-schedule-features">
-                                                                            <li>9253 Delta</li>
-                                                                            <li>Wide-body jet</li>
-                                                                            <li>Embraer 175</li>
-                                                                        </ul>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <a class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn" href="/flight-checkout?utm_source=booking-section&flight=<%= flight['id'] %>">Book Now</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <% } %>
                         </div>
                     </div>
                 </div>
@@ -467,5 +276,31 @@
         <%- include(viewsRoot + 'partials/footer') %>
         <!--  -->
         <%- include(viewsRoot + 'partials/footer-scripts') %>
+
+        <script>
+            $(function() {
+                $('.search-flight').on('click', function(e) {
+                    e.preventDefault();
+
+                    var data = {};
+
+                    data['origin'] = $('#origin').val();
+                    data['destination'] = $('#destination').val();
+                    data['departure'] = $('#checkin').val() + '/19';
+                    data['arrival'] = $('#checkout').val() + '/19';
+                    data['seats'] = parseInt($('#passengers').val());
+
+                    if (!data['origin'] || !data['destination'] || !data['departure'] || !data['arrival'] || !data['seats']) {
+                        return toastr.error('Enter required info for correct matches');
+                    }
+
+                    if (!data['seats']) {
+                        return toastr.error('Select number of seats to book for');
+                    }
+
+                    window.location.href = location.href.split('?')[0] + '?origin=' + data['origin'] + '&destination=' + data['destination'] + '&departure=' + data['departure'] + '&arrival=' + data['arrival'] + '&seats=' + data['seats'];
+                });
+            });
+        </script>
     </body>
 </html>

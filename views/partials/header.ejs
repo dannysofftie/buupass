@@ -67,9 +67,15 @@
                             </div>
                         </div>
                     </li>
+                    <% if(!(typeof user !== 'undefined' && user['email'])) { %>
                     <li class="navbar-nav-item-user">
                         <a href="/login" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-user-circle-o navbar-nav-item-user-icon"></i>Login </a>
                     </li>
+                    <% } else { %>
+                    <li class="navbar-nav-item-user">
+                        <a href="/logout" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-user-circle-o navbar-nav-item-user-icon"></i>Logout </a>
+                    </li>
+                    <% } %>
                 </ul>
             </div>
         </div>

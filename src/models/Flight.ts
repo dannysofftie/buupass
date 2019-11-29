@@ -2,11 +2,16 @@ import { Document, Schema, HookNextFunction, model } from 'mongoose';
 
 export interface IFreight {
     origin: string;
-    email: string;
-    name: string;
-    idnumber: number;
-    phone: string;
-    password: string;
+    destination: string;
+    departure: Date;
+    arrival: Date;
+    cost: number;
+    seats: number;
+    fullTrip: boolean;
+    code: string;
+    discount?: number;
+    airline: string;
+    flightType: string;
 }
 
 export interface IFlightDocument extends IFreight, Document {}
@@ -16,16 +21,37 @@ const flight = new Schema<IFlightDocument>(
         origin: {
             type: String,
         },
-        email: {
-            type: String,
-            required: true,
-        },
-        name: {
+        destination: {
             type: String,
         },
-        password: {
+        departure: {
+            type: Date,
+        },
+        arrival: {
+            type: Date,
+        },
+        cost: {
+            type: Number,
+        },
+        seats: {
+            type: Number,
+        },
+        fullTrip: {
+            type: Boolean,
+            default: true,
+        },
+        code: {
             type: String,
-            required: true,
+        },
+        discount: {
+            type: Number,
+            default: 0,
+        },
+        airline: {
+            type: String,
+        },
+        flightType: {
+            type: String,
         },
     },
     { timestamps: { createdAt: 'createdat', updatedAt: 'updatedat' } }

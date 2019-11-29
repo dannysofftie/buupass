@@ -6,9 +6,10 @@ import { FastifyInstance, FastifyReply, FastifyRequest, FastifyMiddleware } from
  * @export
  */
 export function determineAccountAndUser(app: FastifyInstance, req: FastifyRequest) {
-    const auth = req.headers['authorization'] as string;
+    const auth: string = req.headers['authorization'] || req.cookies['token'];
+
     try {
-        const token = auth.split(' ')[1];
+        const token = auth.split(' ')[0] === 'Bearer' ? auth.split(' ')[1] : auth;
 
         return app.utils.verify(token);
     } catch {
@@ -18,7 +19,31 @@ export function determineAccountAndUser(app: FastifyInstance, req: FastifyReques
 
 /**
  * Prehandler hook,
- *  - Protect all resources accessible to engineers only
+ *  - Protect all resources accessible to admin only
+ *
+ * @export
+ * @param {FastifyRequest} req
+ * @param {FastifyReply<{}>} res
+ */
+export function protectAdminResources(req: FastifyRequest, res: FastifyReply<{}>, done: (err?: Error) => void): any {
+    const auth = req.headers['authorization'] as string;
+
+    if (!auth) {
+        return res.status(401).send({ error: 'unauthorized', message: 'Missing authentication token' });
+    }
+
+    const { account, email, id } = determineAccountAndUser(this, req);
+
+    if (account !== 'admin') {
+        return res.status(403).send({ error: 'forbidden', message: 'Invalid credentials in authentication token' });
+    }
+
+    return done();
+}
+
+/**
+ * Prehandler hook,
+ *  - Protect all resources accessible to clients only
  *
  * @export
  * @param {FastifyRequest} req
@@ -63,4 +88,28 @@ export function protectAuthorizedUser(req: FastifyRequest, res: FastifyReply<{}>
     }
 
     return done();
+}
+
+/**
+ * Allow access to protected resources for any authorized user
+ *
+ * @export
+ * @param {FastifyRequest} req
+ * @param {FastifyReply<{}>} res
+ * @param {(err?: Error) => void} done
+ * @returns
+ */
+export function protectAuthorizedUserViews(req: FastifyRequest, res: FastifyReply<{}>, done: (err?: Error) => void): any {
+    const token = req.cookies['token'];
+
+    if (!token) {
+        return res.redirect('/logout?utm_source=authentication-redirect');
+    }
+
+    return done();
+}
+
+export function logoutAndClearToken(req: FastifyRequest, res: FastifyReply<{}>, done: (err?: Error) => void): any {
+    res.setCookie('token', '', { expires: new Date('01-01-1997') });
+    res.redirect('/?utm_source=authentication-server-redirect');
 }

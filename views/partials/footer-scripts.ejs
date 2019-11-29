@@ -9,7 +9,7 @@
 <script src="/public/js/magnific-popup.js"></script>
 <script src="/public/js/ion-range-slider.js"></script>
 <script src="/public/js/sticky-kit.js"></script>
-<script src="/public/js/smooth-scroll.js"></script>
+<!-- <script src="/public/js/smooth-scroll.js"></script> -->
 <script src="/public/js/fotorama.js"></script>
 <script src="/public/js/bs-datepicker.js"></script>
 <script src="/public/js/typeahead.js"></script>
@@ -19,3 +19,27 @@
 <script src="/public/js/fitvid.js"></script>
 <script src="/public/js/youtube-bg.js"></script>
 <script src="/public/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="/public/js/utilities.js"></script>
+<script>
+    $(function() {
+        toastr.options = {
+            closeButton: true,
+            debug: false,
+            newestOnTop: true,
+            progressBar: false,
+            positionClass: 'toast-bottom-right',
+            preventDuplicates: true,
+            onclick: null,
+            showDuration: '4000',
+            hideDuration: '500',
+            timeOut: '4000',
+            extendedTimeOut: '1000',
+            showEasing: 'swing',
+            hideEasing: 'linear',
+            showMethod: 'fadeIn',
+            hideMethod: 'fadeOut',
+        };
+    });
+</script>

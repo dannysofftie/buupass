@@ -17,6 +17,7 @@ import utilities from '../utils';
 import viewroutes from '../routes/view-routes';
 import * as cluster from 'cluster';
 import * as os from 'os';
+import * as moment from 'moment';
 
 const settings = require(join(__dirname, '..', '..', 'settings.json'));
 
@@ -137,6 +138,7 @@ export default class App {
             },
             includeViewExtension: true,
             defaultContext: {
+                moment,
                 viewsRoot: join(__dirname, '..', '..', 'views/'),
             },
         });

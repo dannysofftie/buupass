@@ -84,7 +84,9 @@ export default abstract class Controller {
      * @returns {Promise<any>}
      * @memberof Controller
      */
-    public abstract async findAllEntries(): Promise<any>;
+    public async findAllEntries(): Promise<any> {
+        //
+    }
 
     /**
      * Add a new entry to the referenced schema
@@ -93,7 +95,9 @@ export default abstract class Controller {
      * @returns {Promise<any>}
      * @memberof Controller
      */
-    public abstract async addNewEntry(): Promise<any>;
+    public async addNewEntry(): Promise<any> {
+        //
+    }
 
     /**
      * Find an entry from the referenced schema, update and return update status
@@ -101,7 +105,9 @@ export default abstract class Controller {
      * @returns {Promise<any>}
      * @memberof Controller
      */
-    public abstract async findOneAndUpdate(): Promise<any>;
+    public async findOneAndUpdate(): Promise<any> {
+        //
+    }
 
     /**
      * Find and return one entry from the refenced schema.
@@ -110,5 +116,7 @@ export default abstract class Controller {
      * @returns {Promise<any>}
      * @memberof Controller
      */
-    public abstract async findOneEntry(): Promise<any>;
+    public async findOneEntry(): Promise<any> {
+        //
+    }
 }

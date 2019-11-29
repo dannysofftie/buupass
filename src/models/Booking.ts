@@ -1,10 +1,10 @@
-import { Schema, Document, model, HookNextFunction } from 'mongoose';
+import { Schema, Document, model, HookNextFunction, Types } from 'mongoose';
 
 export interface IBooking {
-    client: Schema.Types.ObjectId;
-    flight: Schema.Types.ObjectId;
+    client: Types.ObjectId;
+    flight: Types.ObjectId;
     seats: number;
-    payment: {
+    payment?: {
         status: boolean;
         amount: number;
         date: Date;

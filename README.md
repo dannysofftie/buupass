@@ -18,4 +18,5 @@ Uses Fastify with TypeScript, database as MongoDB and ejs as the templating engi
     - `npm run build`
     - `npm start`
 
-6. If all above fails, or you might want to skip build and installation process, the application is hosted on [Heroku here](https://buu-pass.herokuapp.com/)
+6. If all above fails, or you might want to skip build and installation process, the application is hosted [here](http://134.209.24.6:5000/).
+7. Minimal API documentation [here](http://134.209.24.6:5000/docs)

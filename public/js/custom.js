@@ -24,7 +24,7 @@ $(document).ready(function() {
     autocomplete();
     searchResultsCollapse();
     comingSoonCountdown();
-    smoothScroll();
+    // smoothScroll();
 
     if ($(window).width() > mobileViewport) {
         YouTubeVideo();
@@ -309,30 +309,30 @@ function heroSearchSections() {
 }
 
 function autocomplete() {
-    $('.typeahead').typeahead({
-        minLength: 3,
-        showHintOnFocus: true,
-        source: function(q, cb) {
-            return $.ajax({
-                dataType: 'jsonp',
-                type: 'get',
-                url: 'https://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,
-                chache: false,
-                success: function(data) {
-                    var res = [];
-                    $.each(data, function(index, val) {
-                        if (val !== '%s') {
-                            res.push({
-                                id: index,
-                                name: val,
-                            });
-                        }
-                    });
-                    cb(res);
-                },
-            });
-        },
-    });
+    // $('.typeahead').typeahead({
+    //     minLength: 3,
+    //     showHintOnFocus: true,
+    //     source: function(q, cb) {
+    //         return $.ajax({
+    //             dataType: 'jsonp',
+    //             type: 'get',
+    //             url: 'https://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,
+    //             chache: false,
+    //             success: function(data) {
+    //                 var res = [];
+    //                 $.each(data, function(index, val) {
+    //                     if (val !== '%s') {
+    //                         res.push({
+    //                             id: index,
+    //                             name: val,
+    //                         });
+    //                     }
+    //                 });
+    //                 cb(res);
+    //             },
+    //         });
+    //     },
+    // });
 }
 
 function searchResultsCollapse() {

@@ -29,14 +29,14 @@
                                     </div>
                                     <div class="theme-login-box">
                                         <div class="theme-login-box-inner">
-                                            <form class="theme-login-form">
+                                            <form class="theme-login-form" id="loginform">
                                                 <div class="form-group theme-login-form-group">
-                                                    <input class="form-control" type="text" placeholder="Email Address" />
+                                                    <input class="form-control" type="text" name="email" placeholder="Email Address" />
                                                 </div>
                                                 <div class="form-group theme-login-form-group">
-                                                    <input class="form-control" type="password" placeholder="Password" />
+                                                    <input class="form-control" type="password" name="password" placeholder="Password" />
                                                     <p class="help-block">
-                                                        <a href="pwd-reset-2.html">Forgot password?</a>
+                                                        <!-- <a href="pwd-reset-2.html">Forgot password?</a> -->
                                                     </p>
                                                 </div>
                                                 <div class="form-group">
@@ -52,7 +52,8 @@
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <a class="btn btn-uc btn-dark btn-block btn-lg" href="#">Sign In</a>
+
+                                                <button class="btn btn-uc btn-dark btn-block btn-lg" type="submit">Sign In</button>
                                             </form>
                                             <div class="theme-login-social-separator">
                                                 <p>or sign in with social media</p>
@@ -107,5 +108,38 @@
         <%- include(viewsRoot + 'partials/footer') %>
         <!--  -->
         <%- include(viewsRoot + 'partials/footer-scripts') %>
+        <!--  -->
+
+        <script>
+            $(function() {
+                $('#loginform').on('submit', function(e) {
+                    e.preventDefault();
+                    var data = extractFormData(this);
+
+                    makeRequest('POST', '/auth/sign-in', data).then(function(res) {
+                        res = res['data'];
+
+                        if (res['error'] === 'not-exists') {
+                            return toastr.error('Username or email does not exist!');
+                        }
+                        if (res['error'] === 'password-mismatch') {
+                            return toastr.error('Supplied password is wrong!');
+                        }
+
+                        var token = res['token'];
+
+                        var d = new Date();
+                        d.setTime(d.getTime() + 30 * 24 * 60 * 60 * 1000);
+                        var expires = 'expires=' + d.toUTCString();
+
+                        document.cookie = 'token=' + token + '; expires=' + expires;
+
+                        toastr.success('Authenticated successfully');
+
+                        window.location.href = '/account?utm_source=authentication-redirect';
+                    });
+                });
+            });
+        </script>
     </body>
 </html>

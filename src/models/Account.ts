@@ -5,9 +5,9 @@ export type AccountType = 'client' | 'admin';
 export interface IAccount {
     account: AccountType;
     email: string;
-    name: string;
-    idnumber: number;
-    phone: string;
+    name?: string;
+    idnumber?: number;
+    phone?: string;
     password: string;
 }
 

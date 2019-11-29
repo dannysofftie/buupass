@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title><%= appname %></title>
+
+        <!-- header links -->
+
+        <%- include(viewsRoot + 'partials/header-links') %>
+    </head>
+    <body>
+        <%- include(viewsRoot + 'partials/header') %>
+
+        <!-- MAIN CONTENT -->
+
+        <div class="theme-page-section theme-page-section-gray theme-page-section-lg" style="margin-top: 50px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2-5 ">
+                        <div class="theme-account-sidebar">
+                            <div class="theme-account-avatar">
+                                <img class="theme-account-avatar-img" src="https://i1.wp.com/www.warrenctlibrary.org/wp-content/uploads/2018/05/account-icon-lg.png?fit=292%2C292&ssl=1" alt="Image Alternative text" title="Image Title" />
+                                <p class="theme-account-avatar-name">Welcome, <br /><%= user['email'] %></p>
+                            </div>
+                            <nav class="theme-account-nav">
+                                <ul class="theme-account-nav-list">
+                                    <li>
+                                        <a href="/"> <i class="fa fa-cog"></i>Home </a>
+                                    </li>
+                                    <li>
+                                        <a href="/logout"> <i class="fa fa-bell"></i>Log out </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-md-9-5 ">
+                        <h1 class="theme-account-page-title">Booking History</h1>
+                        <div class="theme-account-history">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Name</th>
+                                        <th>Location</th>
+                                        <th>Date</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="theme-account-history-type">
+                                            <i class="fa fa-home theme-account-history-type-icon"></i>
+                                        </td>
+                                        <td>
+                                            <p class="theme-account-history-type-title">Jolie petit studio Paris 11</p>
+                                            <a class="theme-account-history-item-name" href="#">Vacation rental</a>
+                                        </td>
+                                        <td>
+                                            <a href="#">Paris, France</a>
+                                        </td>
+                                        <td class="theme-account-history-tr-date">
+                                            <p class="theme-account-history-date">Sep 23, 2017 — Sep 25, 2017</p>
+                                        </td>
+                                        <td>
+                                            <p class="theme-account-history-item-price">$318.30</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- END OF MAIN CONTENT -->
+
+        <%- include(viewsRoot + 'partials/footer') %>
+        <!--  -->
+        <%- include(viewsRoot + 'partials/footer-scripts') %>
+    </body>
+</html>
