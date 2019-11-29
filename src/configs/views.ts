@@ -20,7 +20,7 @@ export const routes: IViewRoutes[] = [
         path: '/',
         view: 'index',
         middleware: null,
-        locals: [indexPageData],
+        locals: [indexPageData, allAvailableFlights, clientAccountData],
     },
     {
         path: '/login',
@@ -38,7 +38,7 @@ export const routes: IViewRoutes[] = [
         path: '/search-results',
         view: 'search-results',
         middleware: null,
-        locals: [indexPageData],
+        locals: [indexPageData, allAvailableFlights, clientAccountData],
     },
     {
         path: '/flight-checkout',

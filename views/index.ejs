@@ -17,30 +17,30 @@
             </div>
             <div class="theme-hero-area-body">
                 <div class="container">
-                    <div class="row">
+                    <div class="row _pb-50 _pt-100 _pv-mob-50">
                         <div class="col-md-10 col-md-offset-1">
-                            <div class="theme-search-area _pt-150 _pb-100 _pv-mob-60 theme-search-area-stacked">
-                                <div class="theme-search-area-header _c-w _ta-c">
-                                    <h1 class="theme-search-area-title">Search for Flights</h1>
-                                    <p class="theme-search-area-subtitle">Compare several flight providers at once</p>
+                            <div class="theme-search-area _mob-h theme-search-area-white theme-search-area-stacked">
+                                <div class="theme-search-area-header _ta-c">
+                                    <h1 class="theme-search-area-title theme-search-area-title-sm"><%= flights.length %> flights to different destinations</h1>
+                                    <p class="theme-search-area-subtitle">Search & book flights</p>
                                 </div>
                                 <div class="theme-search-area-form" id="hero-search-form">
                                     <div class="row" data-gutter="none">
                                         <div class="col-md-5 ">
                                             <div class="row" data-gutter="none">
                                                 <div class="col-md-6 ">
-                                                    <div class="theme-search-area-section first theme-search-area-section-bg-white theme-search-area-section-no-border theme-search-area-section-mr theme-search-area-section-curved">
+                                                    <div class="theme-search-area-section first theme-search-area-section-curved theme-search-area-section-sm">
                                                         <div class="theme-search-area-section-inner">
                                                             <i class="theme-search-area-section-icon lin lin-location-pin"></i>
-                                                            <input class="theme-search-area-section-input typeahead" type="text" placeholder="Departure" data-provide="typeahead" />
+                                                            <input class="theme-search-area-section-input typeahead" type="text" placeholder="From" id="origin" data-provide="typeahead" />
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 ">
-                                                    <div class="theme-search-area-section theme-search-area-section-bg-white theme-search-area-section-no-border theme-search-area-section-mr theme-search-area-section-curved">
+                                                    <div class="theme-search-area-section theme-search-area-section-curved theme-search-area-section-sm">
                                                         <div class="theme-search-area-section-inner">
                                                             <i class="theme-search-area-section-icon lin lin-location-pin"></i>
-                                                            <input class="theme-search-area-section-input typeahead" type="text" placeholder="Arrival" data-provide="typeahead" />
+                                                            <input class="theme-search-area-section-input typeahead" type="text" placeholder="To" id="destination" data-provide="typeahead" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -49,38 +49,38 @@
                                         <div class="col-md-6 ">
                                             <div class="row" data-gutter="none">
                                                 <div class="col-md-4 ">
-                                                    <div class="theme-search-area-section theme-search-area-section-bg-white theme-search-area-section-no-border theme-search-area-section-mr theme-search-area-section-curved">
+                                                    <div class="theme-search-area-section theme-search-area-section-curved theme-search-area-section-sm">
                                                         <div class="theme-search-area-section-inner">
                                                             <i class="theme-search-area-section-icon lin lin-calendar"></i>
-                                                            <input class="theme-search-area-section-input datePickerStart _mob-h" value="Wed 06/27" type="text" placeholder="Check-in" />
-                                                            <input class="theme-search-area-section-input _desk-h mobile-picker" value="2018-06-27" type="date" />
+                                                            <input class="theme-search-area-section-input datePickerStart _mob-h" type="text" id="checkin" placeholder="Check-in" />
+                                                            <input class="theme-search-area-section-input _desk-h mobile-picker" type="text" />
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 ">
-                                                    <div class="theme-search-area-section theme-search-area-section-bg-white theme-search-area-section-no-border theme-search-area-section-mr theme-search-area-section-curved">
+                                                    <div class="theme-search-area-section theme-search-area-section-curved theme-search-area-section-sm">
                                                         <div class="theme-search-area-section-inner">
                                                             <i class="theme-search-area-section-icon lin lin-calendar"></i>
-                                                            <input class="theme-search-area-section-input datePickerEnd _mob-h" value="Mon 07/02" type="text" placeholder="Check-out" />
-                                                            <input class="theme-search-area-section-input _desk-h mobile-picker" value="2018-07-02" type="date" />
+                                                            <input class="theme-search-area-section-input datePickerEnd _mob-h" type="text" id="checkout" placeholder="Check-out" />
+                                                            <input class="theme-search-area-section-input _desk-h mobile-picker" type="text" />
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 ">
-                                                    <div class="theme-search-area-section theme-search-area-section-bg-white theme-search-area-section-no-border theme-search-area-section-mr theme-search-area-section-curved quantity-selector" data-increment="Passengers">
+                                                    <div class="theme-search-area-section theme-search-area-section-curved theme-search-area-section-sm quantity-selector" data-increment="Passengers">
                                                         <div class="theme-search-area-section-inner">
                                                             <i class="theme-search-area-section-icon lin lin-people"></i>
-                                                            <input class="theme-search-area-section-input" value="1 Passenger" type="text" />
+                                                            <input class="theme-search-area-section-input" id="passengers" value="0" type="text" />
                                                             <div class="quantity-selector-box" id="FlySearchPassengers">
                                                                 <div class="quantity-selector-inner">
                                                                     <p class="quantity-selector-title">Passengers</p>
                                                                     <ul class="quantity-selector-controls">
                                                                         <li class="quantity-selector-decrement">
-                                                                            <a href="#">&#45;</a>
+                                                                            <a href="#">-</a>
                                                                         </li>
                                                                         <li class="quantity-selector-current">1</li>
                                                                         <li class="quantity-selector-increment">
-                                                                            <a href="#">&#43;</a>
+                                                                            <a href="#">+</a>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -91,13 +91,13 @@
                                             </div>
                                         </div>
                                         <div class="col-md-1 ">
-                                            <a href="/search-results" class="theme-search-area-submit _mt-0 theme-search-area-submit-glow theme-search-area-submit-no-border theme-search-area-submit-curved">Search!</a>
+                                            <button class="theme-search-area-submit _tt-uc _mt-0 theme-search-area-submit-curved theme-search-area-submit-sm search-flight">Search</button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="theme-search-area-options theme-search-area-options-white theme-search-area-options-center theme-search-area-options-dot-primary-inverse clearfix">
+                                <div class="theme-search-area-options theme-search-area-options-center theme-search-area-options-dot-primary-inverse clearfix">
                                     <div class="btn-group theme-search-area-options-list" data-toggle="buttons">
-                                        <label class="btn btn-primary active"> <input type="radio" name="flight-options" id="flight-option-1" checked />Round Trip </label>
+                                        <label class="btn btn-primary active"> <input type="radio" name="flight-options" id="flight-option-1" checked="" />Round Trip </label>
                                         <label class="btn btn-primary"> <input type="radio" name="flight-options" id="flight-option-2" />One Way </label>
                                     </div>
                                 </div>
@@ -345,9 +345,35 @@
                 </div>
             </div>
         </div>
-        
+
         <%- include(viewsRoot + 'partials/footer') %>
         <!--  -->
         <%- include(viewsRoot + 'partials/footer-scripts') %>
+
+        <script>
+            $(function() {
+                $('.search-flight').on('click', function(e) {
+                    e.preventDefault();
+
+                    var data = {};
+
+                    data['origin'] = $('#origin').val();
+                    data['destination'] = $('#destination').val();
+                    data['departure'] = $('#checkin').val() + '/19';
+                    data['arrival'] = $('#checkout').val() + '/19';
+                    data['seats'] = parseInt($('#passengers').val());
+
+                    if (!data['origin'] || !data['destination'] || !data['departure'] || !data['arrival'] || !data['seats']) {
+                        return toastr.error('Enter required info for correct matches');
+                    }
+
+                    if (!data['seats']) {
+                        return toastr.error('Select number of seats to book for');
+                    }
+
+                    window.location.href = location.protocol + '//' + location.host + '/search-results?origin=' + data['origin'] + '&destination=' + data['destination'] + '&departure=' + data['departure'] + '&arrival=' + data['arrival'] + '&seats=' + data['seats'];
+                });
+            });
+        </script>
     </body>
 </html>
