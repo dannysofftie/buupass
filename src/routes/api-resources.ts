@@ -66,7 +66,6 @@ export default (app: FastifyInstance<Server, IncomingMessage, ServerResponse>, o
     app.post(
         '/book-flight',
         {
-            preHandler: protectClientResources,
             schema: {
                 tags: ['api'],
                 description: 'Book a new flight.',
@@ -76,17 +75,34 @@ export default (app: FastifyInstance<Server, IncomingMessage, ServerResponse>, o
                 body: {
                     type: 'object',
                     properties: {
-                        title: { type: 'string', description: 'Sample entry title, e.g Resource title.' },
-                        description: { type: 'string', description: 'Resource description' },
+                        flight: { type: 'string', description: 'Flight id' },
+                        passengers: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    firstname: { type: 'string' },
+                                    lastname: { type: 'string' },
+                                    phone: { type: 'string' },
+                                    idnumber: { type: 'string' },
+                                    country: { type: 'string' },
+                                },
+                            },
+                        },
+                        payment: {
+                            type: 'object',
+                            properties: {
+                                nameOnCard: { type: 'string' },
+                                cardNumber: { type: 'string' },
+                                month: { type: 'number' },
+                                year: { type: 'number' },
+                                cvv: { type: 'string' },
+                            },
+                        },
+                        email: { type: 'string', description: 'Email address' },
                     },
-                    required: ['title'],
                 },
                 summary: 'Book flight',
-                security: [
-                    {
-                        apiKey: [],
-                    },
-                ],
             },
         },
         async (req, res) => await new Bookings(app, req, res).addNewEntry()
@@ -151,6 +167,16 @@ export default (app: FastifyInstance<Server, IncomingMessage, ServerResponse>, o
             },
         },
         async (req, res) => await new Bookings(app, req, res).cancelFlight()
+    );
+
+    app.get(
+        '/add-passenger',
+        {
+            schema: {
+                hide: true,
+            },
+        },
+        async (req, res) => await new Flights(app, req, res).addPassenger()
     );
 
     // pass to the next middleware

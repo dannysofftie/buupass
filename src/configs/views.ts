@@ -1,5 +1,5 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
-import { allAvailableFlights, clientAccountData, indexPageData } from '../locals';
+import { allAvailableFlights, clientAccountData, indexPageData, flightCheckoutData, allBookings } from '../locals';
 import { logoutAndClearToken, protectAuthorizedUserViews } from '../middlewares/Authentication';
 
 /**
@@ -44,7 +44,7 @@ export const routes: IViewRoutes[] = [
         path: '/flight-checkout',
         view: 'flight-checkout',
         middleware: null,
-        locals: [indexPageData, clientAccountData],
+        locals: [indexPageData, clientAccountData, flightCheckoutData],
     },
     {
         path: '/flights',
@@ -56,7 +56,7 @@ export const routes: IViewRoutes[] = [
         path: '/account',
         view: 'account',
         middleware: protectAuthorizedUserViews,
-        locals: [indexPageData, clientAccountData],
+        locals: [indexPageData, clientAccountData, allBookings],
     },
     {
         path: '/logout',

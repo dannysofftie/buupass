@@ -1,5 +1,6 @@
 import { IFreight } from '../models/Flight';
 import Controller from '../utils/Controller';
+import { Types } from 'mongoose';
 
 export default class Flights extends Controller {
     public async addNewEntry(): Promise<any> {
@@ -30,15 +31,62 @@ export default class Flights extends Controller {
     public async findAllEntries(): Promise<any> {
         return await this.app.models.Flight.aggregate([
             {
-                $match: {},
+                $lookup: {
+                    from: 'bookings',
+                    let: { id: '$id' },
+                    pipeline: [
+                        {
+                            $match: { $expr: { $eq: ['$flight', '$$id'] } },
+                        },
+                    ],
+                    as: 'booked',
+                },
+            },
+            {
+                $project: { booked: { $size: '$booked' }, other: '$$ROOT' },
+            },
+            {
+                $replaceRoot: { newRoot: { $mergeObjects: ['$other', '$$ROOT'] } },
+            },
+            {
+                $project: { other: 0 },
             },
         ]);
     }
 
     public async findOneEntry() {
+        const query = this.req.query['flight']
+            ? {
+                  id: Types.ObjectId(this.req.query['flight']),
+              }
+            : {
+                  code: this.body['code'] || this.req.query['code'],
+              };
+
         return this.app.models.Flight.aggregate([
             {
-                $match: { code: this.body['code'] || this.req.query['code'] },
+                $match: query,
+            },
+            {
+                $lookup: {
+                    from: 'bookings',
+                    let: { id: '$id' },
+                    pipeline: [
+                        {
+                            $match: { $expr: { $eq: ['$flight', '$$id'] } },
+                        },
+                    ],
+                    as: 'booked',
+                },
+            },
+            {
+                $project: { booked: { $size: '$booked' }, other: '$$ROOT' },
+            },
+            {
+                $replaceRoot: { newRoot: { $mergeObjects: ['$other', '$$ROOT'] } },
+            },
+            {
+                $project: { other: 0 },
             },
         ]);
     }
@@ -52,11 +100,36 @@ export default class Flights extends Controller {
             seats: this.req.query['seats'],
         };
 
+        const bookedSeats = [
+            {
+                $lookup: {
+                    from: 'bookings',
+                    let: { id: '$id' },
+                    pipeline: [
+                        {
+                            $match: { $expr: { $eq: ['$flight', '$$id'] } },
+                        },
+                    ],
+                    as: 'booked',
+                },
+            },
+            {
+                $project: { booked: { $size: '$booked' }, other: '$$ROOT' },
+            },
+            {
+                $replaceRoot: { newRoot: { $mergeObjects: ['$other', '$$ROOT'] } },
+            },
+            {
+                $project: { other: 0 },
+            },
+        ];
+
         if (search.origin && !search.destination) {
             return await this.app.models.Flight.aggregate([
                 {
                     $match: { origin: { $regex: new RegExp(search.origin, 'ig') } },
                 },
+                ...bookedSeats,
             ]);
         }
 
@@ -67,9 +140,16 @@ export default class Flights extends Controller {
                         $and: [{ origin: { $regex: new RegExp(search.origin, 'ig') } }, { destination: { $regex: new RegExp(search.destination, 'ig') } }],
                     },
                 },
+                ...bookedSeats,
             ]);
         }
 
         return [];
+    }
+
+    public async addPassenger() {
+        const html = this.app.utils.compileEjs({ template: 'add-passenger' }, { number: Number(this.req.query['n']) + 1 });
+
+        return this.res.type('text/html').send(html);
     }
 }

@@ -1,11 +1,10 @@
 import { pseudoRandomBytes } from 'crypto';
 import { IAccount } from '../models/Account';
-import { IBooking } from '../models/Booking';
 import Controller from '../utils/Controller';
 
 export default class Bookings extends Controller {
     public async addNewEntry(): Promise<any> {
-        if (!this.user.id) {
+        if (!this.user) {
             const user: IAccount = {
                 account: 'client',
                 email: this.body['email'],
@@ -13,13 +12,23 @@ export default class Bookings extends Controller {
             };
 
             // create user account for faster subsequent checkouts
+            let exists = await (await this.app.models.Account.aggregate([{ $match: { email: user.email } }]))[0];
+
+            if (!exists) {
+                exists = await new this.app.models.Account(user).save();
+            }
+
+            this.user.id = exists['id'];
         }
 
-        const data: IBooking = {
+        const data = {
             client: this.user.id,
-            flight: this.body['flight'],
-            seats: this.body['seats'],
+            ...this.body,
         };
+
+        // basic without checking remaining seats
+
+        await new this.app.models.Booking(data).save();
 
         return { message: 'success' };
     }
@@ -32,7 +41,6 @@ export default class Bookings extends Controller {
                 },
             ]);
         }
-
         return [];
     }
 

@@ -4,7 +4,7 @@ import { minify } from 'html-minifier';
 import { join } from 'path';
 
 interface ITemplatePaths {
-    template: 'account-creation' | 'reset-password';
+    template: 'account-creation' | 'reset-password' | 'add-passenger';
 }
 
 export interface ITemplate {
@@ -21,6 +21,7 @@ const rootPath = join(__dirname, '..', '..', 'views', 'emails/');
 const loadTemplate = {
     'account-creation': 'new-account.ejs',
     'reset-password': 'password-reset.ejs',
+    'add-passenger': 'passenger.ejs',
 };
 
 export interface ICompileTemplate {

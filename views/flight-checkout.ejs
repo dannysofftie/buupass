@@ -15,28 +15,35 @@
         <div class="theme-page-section theme-page-section-lg" style="margin-top: 50px;">
             <div class="container">
                 <div class="row row-col-static row-col-mob-gap" id="sticky-parent" data-gutter="60" style="position: relative;">
+                    <% if(!flight['origin']) { %>
+                    <div class="jumbotron text-center" style="margin: 15vh 0px;">
+                        <span>We couldn't find the flight you're looking for. You might want to refine your search <a href="/flights?utm_source=flight-not-found-page">here</a></span>
+                    </div>
+                    <% } else { %>
                     <div class="col-md-8 ">
                         <div class="theme-payment-page-sections">
-                            <div class="theme-payment-page-sections-item">
-                                <div class="theme-payment-page-signin">
-                                    <i class="theme-payment-page-signin-icon fa fa-user-circle-o"></i>
-                                    <div class="theme-payment-page-signin-body">
-                                        <h4 class="theme-payment-page-signin-title">Sign in if you have an account</h4>
-                                        <p class="theme-payment-page-signin-subtitle">We will autofill your details for faster checkout</p>
-                                    </div>
-                                    <a class="btn theme-payment-page-signin-btn btn-primary" href="#">Sign in</a>
-                                </div>
+                            <% if(!(typeof user !== 'undefined' && user['email'])) { %>
+                            <div class="theme-search-results-sign-in _mob-h bg-grad">
+                                <i class="theme-search-results-sign-in-icon fa fa-unlock-alt"></i>
+
+                                <h5 class="theme-search-results-sign-in-title">
+                                    Sign in to unlock our secret delas. Save up to
+                                    <b>50%</b>
+                                </h5>
+                                <a class="btn theme-search-results-sign-in-btn btn-ghost btn-white" href="/login">Sign in now</a>
                             </div>
+
+                            <% } %>
                             <div class="theme-payment-page-sections-item">
                                 <div class="theme-search-results-item theme-payment-page-item-thumb">
                                     <div class="row" data-gutter="20">
                                         <div class="col-md-9 ">
-                                            <p class="theme-search-results-item-flight-payment-airline">You are flying SWISS Airlines</p>
-                                            <h5 class="theme-search-results-item-title">London, STN &nbsp;→&nbsp; New York, EWR</h5>
-                                            <p class="theme-search-results-item-flight-payment-info">Round-trip, Economy, 1 Adult</p>
+                                            <p class="theme-search-results-item-flight-payment-airline">You are flying <%= flight['airline'] %></p>
+                                            <h5 class="theme-search-results-item-title"><%= flight['origin'] %> &nbsp;→&nbsp; <%= flight['destination'] %></h5>
+                                            <p class="theme-search-results-item-flight-payment-info">One way, Economy, 1 Adult (Default)</p>
                                             <ul class="theme-search-results-item-flight-payment-dates">
-                                                <li>Depart: May 17, 2018</li>
-                                                <li>Return: May 23, 2018</li>
+                                                <li>Depart: <%= moment(flight['departure']).format('Do MMM YYYY, hh:mm A') %></li>
+                                                <li>Arrival: <%= moment(flight['arrival']).format('Do MMM YYYY, hh:mm A') %></li>
                                             </ul>
                                         </div>
                                         <div class="col-md-3 ">
@@ -47,183 +54,120 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="theme-payment-page-sections-item">
-                                <h3 class="theme-payment-page-sections-item-title">Enter Passenger Details</h3>
-                                <div class="theme-payment-page-form">
-                                    <h3 class="theme-payment-page-form-title">Passenger 1</h3>
-                                    <div class="row row-col-gap" data-gutter="20">
-                                        <div class="col-md-6 ">
-                                            <div class="row row-col-gap" data-gutter="10">
+
+                            <form action="POST" action="javascript:void(0)" id="book-flight">
+                                <div class="theme-payment-page-sections-item">
+                                    <h3 class="theme-payment-page-sections-item-title">Enter Passenger Details</h3>
+                                    <div class="details">
+                                        <!--  -->
+                                        <div class="theme-payment-page-form passenger">
+                                            <h3 class="theme-payment-page-form-title">Passenger <span class="number">1</span></h3>
+                                            <div class="row row-col-gap" data-gutter="20">
+                                                <div class="col-md-6 ">
+                                                    <div class="theme-payment-page-form-item form-group">
+                                                        <input class="form-control" required type="number" name="phone" placeholder="Phone" />
+                                                    </div>
+                                                </div>
                                                 <div class="col-md-6 ">
                                                     <div class="theme-payment-page-form-item form-group">
                                                         <i class="fa fa-angle-down"></i>
-                                                        <select class="form-control">
-                                                            <option>Month</option>
-                                                            <option>January</option>
+                                                        <select class="form-control" name="gender">
+                                                            <option>Gender</option>
+                                                            <option>Male</option>
+                                                            <option>Female</option>
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3 ">
+                                                <div class="col-md-6 ">
+                                                    <div class="theme-payment-page-form-item form-group">
+                                                        <input class="form-control" required type="text" placeholder="First Name" name="firstname" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <div class="theme-payment-page-form-item form-group">
+                                                        <input class="form-control" required type="text" placeholder="Last Name" name="lastname" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <div class="theme-payment-page-form-item form-group">
+                                                        <input class="form-control" type="number" placeholder="ID Number" name="idnumber" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 ">
                                                     <div class="theme-payment-page-form-item form-group">
                                                         <i class="fa fa-angle-down"></i>
-                                                        <select class="form-control">
-                                                            <option>Day</option>
-                                                            <option>1</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 ">
-                                                    <div class="theme-payment-page-form-item form-group">
-                                                        <i class="fa fa-angle-down"></i>
-                                                        <select class="form-control">
-                                                            <option>Year</option>
-                                                            <option>2018</option>
-                                                            <option>2017</option>
-                                                            <option>2016</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 ">
-                                            <div class="theme-payment-page-form-item form-group">
-                                                <i class="fa fa-angle-down"></i>
-                                                <select class="form-control">
-                                                    <option>Gender</option>
-                                                    <option>Male</option>
-                                                    <option>Female</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 ">
-                                            <div class="theme-payment-page-form-item form-group">
-                                                <input class="form-control" type="text" placeholder="First Name" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 ">
-                                            <div class="theme-payment-page-form-item form-group">
-                                                <input class="form-control" type="text" placeholder="Last Name" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 ">
-                                            <div class="theme-payment-page-form-item form-group">
-                                                <input class="form-control" type="text" placeholder="Passport Serial" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 ">
-                                            <div class="theme-payment-page-form-item form-group">
-                                                <i class="fa fa-angle-down"></i>
-                                                <select class="form-control">
-                                                    <option>Citizenship</option>
-                                                    <option>Afghanistan</option>
-                                                    <option>Albania</option>
-                                                    <option>Algeria</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="theme-payment-page-sections-item">
-                                <h3 class="theme-payment-page-sections-item-title">Enter Billing Information</h3>
-                                <div class="theme-payment-page-form _mb-20">
-                                    <h3 class="theme-payment-page-form-title">Billing Address</h3>
-                                    <div class="row row-col-gap" data-gutter="20">
-                                        <div class="col-md-6 ">
-                                            <div class="theme-payment-page-form-item form-group">
-                                                <input class="form-control" type="text" placeholder="Street (line 1)" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 ">
-                                            <div class="theme-payment-page-form-item form-group">
-                                                <input class="form-control" type="text" placeholder="Street (line 2)" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 ">
-                                            <div class="theme-payment-page-form-item form-group">
-                                                <input class="form-control" type="text" placeholder="Postal Code" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 ">
-                                            <div class="theme-payment-page-form-item form-group">
-                                                <input class="form-control" type="text" placeholder="City" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 ">
-                                            <div class="theme-payment-page-form-item form-group">
-                                                <i class="fa fa-angle-down"></i>
-                                                <select class="form-control">
-                                                    <option>State/Region</option>
-                                                    <option>Alabama</option>
-                                                    <option>Alaska</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 ">
-                                            <div class="theme-payment-page-form-item form-group">
-                                                <i class="fa fa-angle-down"></i>
-                                                <select class="form-control">
-                                                    <option>Select Country</option>
-                                                    <option>Afghanistan</option>
-                                                    <option>Albania</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="theme-payment-page-form">
-                                    <h3 class="theme-payment-page-form-title">Card Details</h3>
-                                    <div class="row row-col-gap" data-gutter="20">
-                                        <div class="col-md-6 ">
-                                            <div class="theme-payment-page-form-item form-group">
-                                                <input class="form-control" type="text" placeholder="Name on Card" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 ">
-                                            <div class="theme-payment-page-form-item form-group">
-                                                <input class="form-control" type="text" placeholder="Credit/Debit Card Number" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 ">
-                                            <div class="row row-col-gap" data-gutter="10">
-                                                <div class="col-md-4 ">
-                                                    <div class="theme-payment-page-form-item form-group">
-                                                        <i class="fa fa-angle-down"></i>
-                                                        <select class="form-control">
-                                                            <option>(1) Jan</option>
-                                                            <option>(2) Feb</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 ">
-                                                    <div class="theme-payment-page-form-item form-group">
-                                                        <i class="fa fa-angle-down"></i>
-                                                        <select class="form-control">
-                                                            <option>2018</option>
-                                                            <option>2019</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 ">
-                                                    <div class="theme-payment-page-form-item form-group">
-                                                        <input class="form-control" type="text" placeholder="Security Code" />
+                                                        <input class="form-control" type="text" required placeholder="Kenya" name="country" />
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="theme-payment-page-sections-item">
-                                <div class="theme-payment-page-booking">
-                                    <div class="theme-payment-page-booking-header">
-                                        <h3 class="theme-payment-page-booking-title">Total</h3>
-                                        <p class="theme-payment-page-booking-subtitle">By clicking book now button you agree with terms and conditionals and money back gurantee. Thank you for trusting our service.</p>
-                                        <p class="theme-payment-page-booking-price">$670.00</p>
+                                    <div style="text-align: right; margin-top: 5px;">
+                                        <span class="btn btn-sm btn-danger" id="add-passenger"><span class="fa fa-plus-circle"></span></span>
                                     </div>
-                                    <a class="btn _tt-uc btn-primary-inverse btn-lg btn-block" href="#">Book Now</a>
                                 </div>
-                            </div>
+                                <div class="theme-payment-page-sections-item card">
+                                    <h3 class="theme-payment-page-sections-item-title">Enter Billing Information</h3>
+                                    <div class="theme-payment-page-form">
+                                        <h3 class="theme-payment-page-form-title">Card Details</h3>
+                                        <div class="row row-col-gap" data-gutter="20">
+                                            <div class="col-md-6 ">
+                                                <div class="theme-payment-page-form-item form-group">
+                                                    <input class="form-control" type="text" name="nameOnCard" required placeholder="Name on Card" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 ">
+                                                <div class="theme-payment-page-form-item form-group">
+                                                    <input class="form-control" type="number" required name="cardNumber" placeholder="Credit/Debit Card Number" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 ">
+                                                <div class="row row-col-gap" data-gutter="10">
+                                                    <div class="col-md-4 ">
+                                                        <div class="theme-payment-page-form-item form-group">
+                                                            <i class="fa fa-angle-down"></i>
+                                                            <select class="form-control" required name="month">
+                                                                <option>(1) Jan</option>
+                                                                <option>(2) Feb</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 ">
+                                                        <div class="theme-payment-page-form-item form-group">
+                                                            <i class="fa fa-angle-down"></i>
+                                                            <select class="form-control" required name="year">
+                                                                <option>2018</option>
+                                                                <option>2019</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 ">
+                                                        <div class="theme-payment-page-form-item form-group">
+                                                            <input class="form-control" required type="text" name="cvv" placeholder="Security Code" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="theme-payment-page-form-item form-group">
+                                                    <input class="form-control" type="text" name="email" required placeholder="Your email address" />
+                                                    <input type="hidden" name="flight" value="<%= flight['id'] %>" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="theme-payment-page-sections-item">
+                                    <div class="theme-payment-page-booking">
+                                        <div class="theme-payment-page-booking-header">
+                                            <h3 class="theme-payment-page-booking-title">Total</h3>
+                                            <p class="theme-payment-page-booking-subtitle">By clicking book now button you agree with terms and conditionals and money back gurantee. Thank you for trusting our service.</p>
+                                            <p class="theme-payment-page-booking-price"><%= new Intl.NumberFormat('en', { style: 'currency', currency: 'KSH' }).format(flight['cost']) %></p>
+                                        </div>
+                                        <button type="submit" class="btn _tt-uc btn-primary-inverse btn-lg btn-block">Book Now</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="col-md-4 ">
@@ -231,9 +175,9 @@
                             <div class="theme-sidebar-section _mb-10">
                                 <h5 class="theme-sidebar-section-title">Booking Summary</h5>
                                 <ul class="theme-sidebar-section-summary-list">
-                                    <li>round-trip, economy, 1 adult</li>
-                                    <li>Depart: Apr 07, 2018</li>
-                                    <li>Return: Apr 13, 2018</li>
+                                    <li>One way, economy, 1 adult (Default)</li>
+                                    <li>Depart: <%= moment(flight['departure']).format('Do MMM YYYY, hh:mm A') %></li>
+                                    <li>Arrival: <%= moment(flight['arrival']).format('Do MMM YYYY, hh:mm A') %></li>
                                 </ul>
                             </div>
                             <div class="theme-sidebar-section _mb-10">
@@ -243,17 +187,17 @@
                                         <li class="theme-sidebar-section-charges-item">
                                             <h5 class="theme-sidebar-section-charges-item-title">1 adult</h5>
                                             <p class="theme-sidebar-section-charges-item-subtitle">Economy</p>
-                                            <p class="theme-sidebar-section-charges-item-price">$615.00</p>
+                                            <p class="theme-sidebar-section-charges-item-price"><%= new Intl.NumberFormat('en', { style: 'currency', currency: 'KSH' }).format(flight['cost']) %></p>
                                         </li>
                                         <li class="theme-sidebar-section-charges-item">
                                             <h5 class="theme-sidebar-section-charges-item-title">Taxes, Fees &amp; Surcharges</h5>
                                             <p class="theme-sidebar-section-charges-item-subtitle"></p>
-                                            <p class="theme-sidebar-section-charges-item-price">$55.00</p>
+                                            <p class="theme-sidebar-section-charges-item-price"><%= new Intl.NumberFormat('en', { style: 'currency', currency: 'KSH' }).format(0.2 * flight['cost']) %></p>
                                         </li>
                                     </ul>
                                     <p class="theme-sidebar-section-charges-total">
                                         Total
-                                        <span>$670.00</span>
+                                        <span><%= new Intl.NumberFormat('en', { style: 'currency', currency: 'KSH' }).format(1.2 * flight['cost']) %></span>
                                     </p>
                                 </div>
                             </div>
@@ -261,7 +205,7 @@
                                 <ul class="theme-sidebar-section-features-list">
                                     <li>
                                         <h5 class="theme-sidebar-section-features-list-title">Manage your bookings!</h5>
-                                        <p class="theme-sidebar-section-features-list-body">You're in control of your booking - no registration required.</p>
+                                        <p class="theme-sidebar-section-features-list-body">You're in control of your booking.</p>
                                     </li>
                                     <li>
                                         <h5 class="theme-sidebar-section-features-list-title">Customer support available 24/7 worldwide!</h5>
@@ -271,6 +215,7 @@
                             </div>
                         </div>
                     </div>
+                    <% } %>
                 </div>
             </div>
         </div>
@@ -280,5 +225,65 @@
         <%- include(viewsRoot + 'partials/footer') %>
         <!--  -->
         <%- include(viewsRoot + 'partials/footer-scripts') %>
+
+        <script>
+            $(function() {
+                $('#add-passenger').click(function(e) {
+                    e.preventDefault();
+
+                    makeRequest('GET', '/api/add-passenger?n=' + $('.passenger').length).then(function(res) {
+                        var html = res['data'];
+
+                        $('.details').append(html);
+                    });
+                });
+
+                // book flight
+                $('#book-flight').on('submit', function(e) {
+                    e.preventDefault();
+
+                    var data = {
+                        passengers: [],
+                    };
+
+                    var passengers = $('.passenger');
+                    var cardDetails = $('.card');
+
+                    passengers.each(function(i, passenger) {
+                        var details = {};
+
+                        $(passenger)
+                            .find('input')
+                            .each(function(j, input) {
+                                details[$(input).attr('name')] = $(input).val();
+                            });
+
+                        data['passengers'].push(details);
+                    });
+
+                    var payment = {};
+
+                    $(cardDetails)
+                        .find('input')
+                        .each(function(i, input) {
+                            payment[$(input).attr('name')] = $(input).val();
+                        });
+
+                    data['payment'] = payment;
+                    data['email'] = $('input[name="email"]').val();
+                    data['flight'] = $('input[name="flight"]').val();
+
+                    makeRequest('POST', '/api/book-flight', data).then(function(res) {
+                        if (res['data']['message'] === 'success') {
+                            setTimeout(function() {
+                                window.location.reload();
+                            }, 3000);
+                            return toastr.success('Success! We have sent you an email/text message.');
+                        }
+                        return toastr.error('There was an error while booking flight for you.');
+                    });
+                });
+            });
+        </script>
     </body>
 </html>

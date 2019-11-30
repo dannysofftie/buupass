@@ -256,9 +256,9 @@
                                             <div class="theme-search-results-item-book">
                                                 <div class="theme-search-results-item-price">
                                                     <p class="theme-search-results-item-price-tag"><%= new Intl.NumberFormat('en', { style: 'currency', currency: 'KSH' }).format(flight['cost']) %></p>
-                                                    <p class="theme-search-results-item-price-sign">economy</p>
+                                                    <p class="theme-search-results-item-price-sign"><span style="color: blue;"><%= flight['seats'] - flight['booked'] %> seats left</span></p>
                                                 </div>
-                                                <a class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn" href="/flight-checkout?utm_source=booking-section&flight=<%= flight['id'] %>">Book Now</a>
+                                                <a class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn" href="/flight-checkout?flight=<%= flight['id'] %><%= typeof query !== 'undefined'  ? '&' + query : '' %>">Book Now</a>
                                             </div>
                                         </div>
                                     </div>

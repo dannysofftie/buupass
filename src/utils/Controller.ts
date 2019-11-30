@@ -71,7 +71,7 @@ export default abstract class Controller {
         if (user) {
             const { email, id, account } = determineAccountAndUser(app, req);
             this.user = {
-                id: Types.ObjectId(id),
+                id: id && Types.ObjectId(id),
                 email,
                 account,
             };

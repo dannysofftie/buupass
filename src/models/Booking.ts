@@ -4,10 +4,19 @@ export interface IBooking {
     client: Types.ObjectId;
     flight: Types.ObjectId;
     seats: number;
+    passengers: Array<{
+        firstname: string;
+        lastname: string;
+        phone: string;
+        idnumber: number;
+        country: string;
+    }>;
     payment?: {
-        status: boolean;
-        amount: number;
-        date: Date;
+        nameOnCard: string;
+        cardNumber: number;
+        month: number;
+        year: number;
+        cvv: string;
     };
 }
 
@@ -24,16 +33,40 @@ const booking = new Schema<IBookingDocument>(
         seats: {
             type: Number,
         },
-        payment: {
-            status: {
-                type: Boolean,
-                default: false,
+        passengers: [
+            {
+                firstname: {
+                    type: String,
+                },
+                lastname: {
+                    type: String,
+                },
+                phone: {
+                    type: Number,
+                },
+                idnumber: {
+                    type: Number,
+                },
+                country: {
+                    type: String,
+                },
             },
-            amount: {
+        ],
+        payment: {
+            nameOnCard: {
+                type: String,
+            },
+            cardNumber: {
                 type: Number,
             },
-            date: {
-                type: Date,
+            month: {
+                type: Number,
+            },
+            year: {
+                type: Number,
+            },
+            cvv: {
+                type: String,
             },
         },
     },
