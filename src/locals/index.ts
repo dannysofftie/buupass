@@ -49,11 +49,3 @@ export async function flightCheckoutData(app: FastifyInstance, req: FastifyReque
 
     return info;
 }
-
-export async function allBookings(app: FastifyInstance, req: FastifyRequest, res: FastifyReply<{}>) {
-    const info = {};
-
-    const bookings = await new Bookings(app, req, res).findAllEntries();
-    console.log(bookings);
-    return info;
-}
