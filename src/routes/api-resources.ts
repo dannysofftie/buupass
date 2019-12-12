@@ -179,6 +179,27 @@ export default (app: FastifyInstance<Server, IncomingMessage, ServerResponse>, o
         async (req, res) => await new Flights(app, req, res).addPassenger()
     );
 
+    app.get(
+        '/bookings',
+        {
+            preHandler: protectClientResources,
+            schema: {
+                description: 'Get bookings for the currently logged in client.',
+                tags: ['api'],
+                response: {
+                    ...app.utils.statuscodes,
+                },
+                summary: 'Get bookings',
+                security: [
+                    {
+                        apiKey: [],
+                    },
+                ],
+            },
+        },
+        async (req, res) => await new Bookings(app, req, res).findAllEntries()
+    );
+
     // pass to the next middleware
     next();
 };

@@ -34,14 +34,38 @@ export default class Bookings extends Controller {
     }
 
     public async findAllEntries() {
+        let bookings: any[] = [];
+
         if (this.user) {
-            return await this.app.models.Booking.aggregate([
+            bookings = await this.app.models.Booking.aggregate([
                 {
                     $match: { client: this.user.id },
                 },
+                {
+                    $lookup: {
+                        from: 'flights',
+                        let: { id: '$flight' },
+                        pipeline: [
+                            {
+                                $match: { $expr: { $eq: ['$_id', '$$id'] } },
+                            },
+                            {
+                                $project: { _id: 0, origin: 1, destination: 1, airline: 1, cost: 1, departure: 1, arrival: 1, code: 1 },
+                            },
+                        ],
+                        as: 'flightInfo',
+                    },
+                },
+                {
+                    $replaceRoot: { newRoot: { $mergeObjects: [{ $arrayElemAt: ['$flightInfo', 0] }, '$$ROOT'] } },
+                },
+                {
+                    $project: { flightInfo: 0 },
+                },
             ]);
         }
-        return [];
+
+        return bookings;
     }
 
     public async findOneAndUpdate(): Promise<any> {

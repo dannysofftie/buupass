@@ -33,6 +33,7 @@
                             </nav>
                         </div>
                     </div>
+                    <% for (const booking of bookings) { %>
                     <div class="col-md-9-5 ">
                         <h1 class="theme-account-page-title">Booking History</h1>
                         <div class="theme-account-history">
@@ -52,23 +53,24 @@
                                             <i class="fa fa-home theme-account-history-type-icon"></i>
                                         </td>
                                         <td>
-                                            <p class="theme-account-history-type-title">Jolie petit studio Paris 11</p>
-                                            <a class="theme-account-history-item-name" href="#">Vacation rental</a>
+                                            <p class="theme-account-history-type-title">Flight <%= booking['code'] %></p>
+                                            <a class="theme-account-history-item-name" href="#"><%= booking['airline'] %></a>
                                         </td>
                                         <td>
-                                            <a href="#">Paris, France</a>
+                                            <a href="#"><%= booking['origin'] + ', ' + booking['destination'] %></a>
                                         </td>
                                         <td class="theme-account-history-tr-date">
-                                            <p class="theme-account-history-date">Sep 23, 2017 — Sep 25, 2017</p>
+                                            <p class="theme-account-history-date"><%= moment(booking['departure']).format('Do MMM YYYY') %> — <%= moment(booking['arrival']).format('Do MMM YYYY') %></p>
                                         </td>
                                         <td>
-                                            <p class="theme-account-history-item-price">$318.30</p>
+                                            <p class="theme-account-history-item-price"><%= new Intl.NumberFormat('en', { style: 'currency', currency: 'KSH' }).format(booking['cost'] * booking['passengers']['length']) %></p>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                    <% } %>
                 </div>
             </div>
         </div>
